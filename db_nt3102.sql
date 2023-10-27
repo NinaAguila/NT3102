@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.2
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1:3308
--- Generation Time: Oct 22, 2023 at 11:45 PM
--- Server version: 8.0.18
--- PHP Version: 7.3.12
+-- Host: 127.0.0.1:3306
+-- Generation Time: Oct 27, 2023 at 09:37 AM
+-- Server version: 8.0.31
+-- PHP Version: 8.0.26
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -25,37 +24,62 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbemployee`
+-- Table structure for table `attendance_tbl`
 --
 
-DROP TABLE IF EXISTS `tbemployee`;
-CREATE TABLE IF NOT EXISTS `tbemployee` (
-  `empid` int(11) NOT NULL,
-  `lastname` varchar(25) NOT NULL,
-  `firstname` varchar(25) NOT NULL,
-  `department` varchar(20) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+DROP TABLE IF EXISTS `attendance_tbl`;
+CREATE TABLE IF NOT EXISTS `attendance_tbl` (
+  `AttendanceID` int NOT NULL,
+  `CourseID` int NOT NULL,
+  `FacultyID` int NOT NULL,
+  `StudentID` int NOT NULL,
+  `AttendanceDate` date NOT NULL,
+  `TimeStart` time(6) NOT NULL,
+  `TimeEnd` time(6) NOT NULL,
+  `Room` varchar(10) COLLATE utf8mb3_unicode_ci NOT NULL,
+  PRIMARY KEY (`AttendanceID`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_studentinfo`
+-- Table structure for table `course_tbl`
 --
 
-DROP TABLE IF EXISTS `tb_studentinfo`;
-CREATE TABLE IF NOT EXISTS `tb_studentinfo` (
-  `studid` int(11) NOT NULL,
-  `lastname` varchar(25) NOT NULL,
-  `firstname` varchar(25) NOT NULL,
-  `course` varchar(20) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+DROP TABLE IF EXISTS `course_tbl`;
+CREATE TABLE IF NOT EXISTS `course_tbl` (
+  `CourseID` int NOT NULL,
+  `CourseName` varchar(25) COLLATE utf8mb3_unicode_ci NOT NULL,
+  PRIMARY KEY (`CourseID`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+
+-- --------------------------------------------------------
 
 --
--- Dumping data for table `tb_studentinfo`
+-- Table structure for table `faculty_tbl`
 --
 
-INSERT INTO `tb_studentinfo` (`studid`, `lastname`, `firstname`, `course`) VALUES
-(1, 'parker', 'peter', 'bsit');
+DROP TABLE IF EXISTS `faculty_tbl`;
+CREATE TABLE IF NOT EXISTS `faculty_tbl` (
+  `FacultyID` int NOT NULL,
+  `FacultyUsername` varchar(25) COLLATE utf8mb3_unicode_ci NOT NULL,
+  `FacultyPassword` varchar(25) COLLATE utf8mb3_unicode_ci NOT NULL,
+  PRIMARY KEY (`FacultyID`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `student_tbl`
+--
+
+DROP TABLE IF EXISTS `student_tbl`;
+CREATE TABLE IF NOT EXISTS `student_tbl` (
+  `StudentID` int NOT NULL,
+  `StudentSRC` varchar(25) COLLATE utf8mb3_unicode_ci NOT NULL,
+  `StudentPassword` varchar(25) COLLATE utf8mb3_unicode_ci NOT NULL,
+  PRIMARY KEY (`StudentID`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
