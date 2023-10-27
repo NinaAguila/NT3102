@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3308
--- Generation Time: Oct 22, 2023 at 11:45 PM
+-- Generation Time: Oct 27, 2023 at 08:31 AM
 -- Server version: 8.0.18
 -- PHP Version: 7.3.12
 
@@ -36,6 +36,13 @@ CREATE TABLE IF NOT EXISTS `tbemployee` (
   `department` varchar(20) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+--
+-- Dumping data for table `tbemployee`
+--
+
+INSERT INTO `tbemployee` (`empid`, `lastname`, `firstname`, `department`) VALUES
+(1, 'aguila', 'nina', 'cics');
+
 -- --------------------------------------------------------
 
 --
@@ -55,7 +62,8 @@ CREATE TABLE IF NOT EXISTS `tb_studentinfo` (
 --
 
 INSERT INTO `tb_studentinfo` (`studid`, `lastname`, `firstname`, `course`) VALUES
-(1, 'parker', 'peter', 'bsit');
+(1, 'parker', 'peter', 'bsit'),
+(2, 'kent', 'clark', 'bsis');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
