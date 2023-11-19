@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 28, 2023 at 03:27 AM
+-- Generation Time: Nov 19, 2023 at 02:31 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.1.12
 
@@ -29,25 +29,36 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `add_stocks` (
   `Product_ID` int(100) NOT NULL,
-  `Product_Name` varchar(100) NOT NULL,
-  `Description` varchar(100) NOT NULL,
-  `Price` int(50) NOT NULL,
   `Quantity` int(50) NOT NULL,
   `Transaction_No` int(50) NOT NULL,
-  `Employee_Name` varchar(10) NOT NULL,
+  `Employee_Name` varchar(50) NOT NULL,
   `Date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `add_stocks`
+--
+
+INSERT INTO `add_stocks` (`Product_ID`, `Quantity`, `Transaction_No`, `Employee_Name`, `Date`) VALUES
+(1, 20, 1, 'Kimi', '2023-11-17');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `category`
+-- Table structure for table `announcement`
 --
 
-CREATE TABLE `category` (
-  `Category_ID` int(100) NOT NULL,
-  `Category_Name` varchar(100) NOT NULL
+CREATE TABLE `announcement` (
+  `id` int(50) NOT NULL,
+  `announcement` varchar(10000) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `announcement`
+--
+
+INSERT INTO `announcement` (`id`, `announcement`) VALUES
+(1, 'UwU');
 
 -- --------------------------------------------------------
 
@@ -57,8 +68,18 @@ CREATE TABLE `category` (
 
 CREATE TABLE `out_stocks` (
   `Product_ID` int(100) NOT NULL,
-  `Stocks` varchar(100) NOT NULL
+  `SoldStocks` varchar(100) NOT NULL,
+  `Transaction_No` int(100) NOT NULL,
+  `Employee_Name` varchar(50) NOT NULL,
+  `Date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `out_stocks`
+--
+
+INSERT INTO `out_stocks` (`Product_ID`, `SoldStocks`, `Transaction_No`, `Employee_Name`, `Date`) VALUES
+(1, '25', 1, 'Kimi', '2023-11-17');
 
 -- --------------------------------------------------------
 
@@ -68,11 +89,19 @@ CREATE TABLE `out_stocks` (
 
 CREATE TABLE `product` (
   `Product_ID` int(100) NOT NULL,
-  `Product_Name` varchar(100) DEFAULT NULL,
-  `Product_Description` varchar(100) DEFAULT NULL,
-  `Product_Price` int(50) NOT NULL,
-  `Category_ID` int(50) NOT NULL
+  `Category_Name` varchar(100) NOT NULL,
+  `Product_Name` varchar(100) NOT NULL,
+  `Description` varchar(100) NOT NULL,
+  `Price` int(50) NOT NULL,
+  `image` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `product`
+--
+
+INSERT INTO `product` (`Product_ID`, `Category_Name`, `Product_Name`, `Description`, `Price`, `image`) VALUES
+(1, 'Uniform', 'Polo', 'Medium', 200, '6557830aad867.png');
 
 -- --------------------------------------------------------
 
@@ -89,6 +118,15 @@ CREATE TABLE `user_data` (
   `Classification` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `user_data`
+--
+
+INSERT INTO `user_data` (`User_ID`, `User_Code`, `Last_Name`, `First_Name`, `User_Type`, `Classification`) VALUES
+(3, '1234', 'Tatum', 'Jason', 'Admin', 'Shop Admin'),
+(4, 'umay', 'Sagan', 'Peter', 'User', 'Student'),
+(5, 'kimi', 'Chu', 'Kimi', 'RGO Admin', 'RGO Staff');
+
 -- --------------------------------------------------------
 
 --
@@ -103,6 +141,15 @@ CREATE TABLE `user_login` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
+-- Dumping data for table `user_login`
+--
+
+INSERT INTO `user_login` (`User_ID`, `User_Type`, `User_Email`, `User_Password`) VALUES
+(3, 'Admin', '1234@g.batstate-u.edu.ph', 'admin'),
+(4, 'User', 'umay@g.batstate-u.edu.ph', 'umay'),
+(5, 'RGO Admin', 'kimi@g.batstate-u.edu.ph', 'admin');
+
+--
 -- Indexes for dumped tables
 --
 
@@ -113,10 +160,10 @@ ALTER TABLE `add_stocks`
   ADD PRIMARY KEY (`Product_ID`);
 
 --
--- Indexes for table `category`
+-- Indexes for table `announcement`
 --
-ALTER TABLE `category`
-  ADD PRIMARY KEY (`Category_ID`);
+ALTER TABLE `announcement`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `out_stocks`
@@ -128,8 +175,7 @@ ALTER TABLE `out_stocks`
 -- Indexes for table `product`
 --
 ALTER TABLE `product`
-  ADD PRIMARY KEY (`Product_ID`),
-  ADD KEY `Category_ID` (`Category_ID`);
+  ADD PRIMARY KEY (`Product_ID`);
 
 --
 -- Indexes for table `user_data`
@@ -151,47 +197,37 @@ ALTER TABLE `user_login`
 -- AUTO_INCREMENT for table `add_stocks`
 --
 ALTER TABLE `add_stocks`
-  MODIFY `Product_ID` int(100) NOT NULL AUTO_INCREMENT;
+  MODIFY `Product_ID` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `category`
+-- AUTO_INCREMENT for table `announcement`
 --
-ALTER TABLE `category`
-  MODIFY `Category_ID` int(100) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `announcement`
+  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `out_stocks`
 --
 ALTER TABLE `out_stocks`
-  MODIFY `Product_ID` int(100) NOT NULL AUTO_INCREMENT;
+  MODIFY `Product_ID` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `Product_ID` int(100) NOT NULL AUTO_INCREMENT;
+  MODIFY `Product_ID` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `user_data`
 --
 ALTER TABLE `user_data`
-  MODIFY `User_ID` int(255) NOT NULL AUTO_INCREMENT;
+  MODIFY `User_ID` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `user_login`
 --
 ALTER TABLE `user_login`
-  MODIFY `User_ID` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `product`
---
-ALTER TABLE `product`
-  ADD CONSTRAINT `product_ibfk_1` FOREIGN KEY (`Category_ID`) REFERENCES `category` (`Category_ID`);
+  MODIFY `User_ID` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
