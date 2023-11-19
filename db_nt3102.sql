@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 19, 2023 at 02:31 PM
+-- Generation Time: Nov 20, 2023 at 12:40 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.1.12
 
@@ -35,13 +35,6 @@ CREATE TABLE `add_stocks` (
   `Date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `add_stocks`
---
-
-INSERT INTO `add_stocks` (`Product_ID`, `Quantity`, `Transaction_No`, `Employee_Name`, `Date`) VALUES
-(1, 20, 1, 'Kimi', '2023-11-17');
-
 -- --------------------------------------------------------
 
 --
@@ -52,13 +45,6 @@ CREATE TABLE `announcement` (
   `id` int(50) NOT NULL,
   `announcement` varchar(10000) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `announcement`
---
-
-INSERT INTO `announcement` (`id`, `announcement`) VALUES
-(1, 'UwU');
 
 -- --------------------------------------------------------
 
@@ -74,13 +60,6 @@ CREATE TABLE `out_stocks` (
   `Date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `out_stocks`
---
-
-INSERT INTO `out_stocks` (`Product_ID`, `SoldStocks`, `Transaction_No`, `Employee_Name`, `Date`) VALUES
-(1, '25', 1, 'Kimi', '2023-11-17');
-
 -- --------------------------------------------------------
 
 --
@@ -95,13 +74,6 @@ CREATE TABLE `product` (
   `Price` int(50) NOT NULL,
   `image` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `product`
---
-
-INSERT INTO `product` (`Product_ID`, `Category_Name`, `Product_Name`, `Description`, `Price`, `image`) VALUES
-(1, 'Uniform', 'Polo', 'Medium', 200, '6557830aad867.png');
 
 -- --------------------------------------------------------
 
@@ -197,25 +169,25 @@ ALTER TABLE `user_login`
 -- AUTO_INCREMENT for table `add_stocks`
 --
 ALTER TABLE `add_stocks`
-  MODIFY `Product_ID` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `Product_ID` int(100) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `announcement`
 --
 ALTER TABLE `announcement`
-  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `out_stocks`
 --
 ALTER TABLE `out_stocks`
-  MODIFY `Product_ID` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `Product_ID` int(100) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `Product_ID` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `Product_ID` int(100) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `user_data`
