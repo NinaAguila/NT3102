@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 06, 2023 at 01:33 AM
+-- Generation Time: Nov 20, 2023 at 12:44 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -29,40 +29,26 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `attendance_tbl` (
   `AttendanceID` int(11) NOT NULL,
-  `CourseID` int(11) NOT NULL,
-  `FacultyID` int(11) NOT NULL,
-  `StudentID` int(11) NOT NULL,
-  `AttendanceDate` date NOT NULL,
+  `FacultyID` varchar(25) NOT NULL,
+  `StudentID` varchar(25) NOT NULL,
+  `AttendanceDate` varchar(25) NOT NULL,
+  `ClassSection` varchar(25) NOT NULL,
+  `Room` varchar(25) NOT NULL,
   `TimeStart` time(6) NOT NULL,
-  `TimeEnd` time(6) NOT NULL,
-  `Room` varchar(10) NOT NULL
+  `TimeEnd` time(6) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `attendance_tbl`
 --
 
-INSERT INTO `attendance_tbl` (`AttendanceID`, `CourseID`, `FacultyID`, `StudentID`, `AttendanceDate`, `TimeStart`, `TimeEnd`, `Room`) VALUES
-(1, 1, 1, 2, '2023-11-02', '08:00:00.000000', '11:00:00.214000', 'CECS 503');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `course_tbl`
---
-
-CREATE TABLE `course_tbl` (
-  `CourseID` int(11) NOT NULL,
-  `CourseName` varchar(50) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Dumping data for table `course_tbl`
---
-
-INSERT INTO `course_tbl` (`CourseID`, `CourseName`) VALUES
-(1, 'Bachelor of Science in Information Technology'),
-(2, 'Bachelor of Science in Computer Science');
+INSERT INTO `attendance_tbl` (`AttendanceID`, `FacultyID`, `StudentID`, `AttendanceDate`, `ClassSection`, `Room`, `TimeStart`, `TimeEnd`) VALUES
+(1, '1', '3', '2023-11-02', 'BSIT-NT-3102', 'CECS 503', '08:00:00.000000', '11:00:00.000000'),
+(2, '1', '2', '2023-11-02', 'BSIT-NT-3102', 'CECS 503', '08:00:00.000000', '11:00:00.000000'),
+(3, '1', '1', '2023-11-02', 'BSIT-NT-3102', 'CECS 503', '08:00:00.000000', '11:00:00.000000'),
+(4, '1', '3', '2023-11-04', 'BSIT-NT-3102', 'HEB 502', '12:00:00.000000', '16:00:00.000000'),
+(11, '1', '1', '2023-11-17', 'BSIT-NT-1104', 'CECS 301', '08:00:00.000000', '12:00:00.000000'),
+(10, '1', '3', '2023-11-17', 'BSCS-NT-1102', 'HEB 402', '12:00:00.000000', '16:00:00.000000');
 
 -- --------------------------------------------------------
 
@@ -91,18 +77,18 @@ INSERT INTO `faculty_tbl` (`FacultyID`, `FacultyUsername`, `FacultyPassword`) VA
 
 CREATE TABLE `student_tbl` (
   `StudentID` int(11) NOT NULL,
-  `StudentSRC` varchar(25) NOT NULL,
-  `StudentPassword` varchar(25) NOT NULL
+  `StudentQR` varchar(300) NOT NULL,
+  `StudentName` varchar(25) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `student_tbl`
 --
 
-INSERT INTO `student_tbl` (`StudentID`, `StudentSRC`, `StudentPassword`) VALUES
-(1, '21-36999', 'auric123'),
-(2, '21-32139', 'emman924'),
-(3, '22-71959', 'aeron098');
+INSERT INTO `student_tbl` (`StudentID`, `StudentQR`, `StudentName`) VALUES
+(1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzcmNvZGUiOiIyMS0zNjk5OSIsImZ1bGxuYW1lIjoiVkFMREVaLCBGUllBTiBBVVJJQyBMLiIsInRpbWVzdGFtcCI6IjIwMjMtMTEtMTYgMjI6MDA6MTUiLCJ0eXBlIjoiU1RVREVOVCIsInVzZXJpZCI6IjIxLTM2OTk5In0.Zvx0BjtFexJ1dKbr295nGIUDCA9vZ44yqmdoBBw7rfc', 'Fryan Auric L. Valdez'),
+(2, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzcmNvZGUiOiIyMS0zNjQ1MiIsImZ1bGxuYW1lIjoiQkFZQkFZLCBFTU1BTlVFTCBULiIsInRpbWVzdGFtcCI6IjIwMjMtMTEtMTYgMTk6MDE6MDYiLCJ0eXBlIjoiU1RVREVOVCIsInVzZXJpZCI6IjIxLTM2NDUyIn0.rXk1EvJwCKX0S1Lw9OpjZV7onA0Nzmj1VpXwPYTZgBE', 'Emmanuel Baybay'),
+(3, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzcmNvZGUiOiIyMS0zNjExMSIsImZ1bGxuYW1lIjoiTEFUT1JSRSwgSk9ITiBBRVJPTiBELiIsInRpbWVzdGFtcCI6IjIwMjMtMTEtMTYgMjE6NTA6MDQiLCJ0eXBlIjoiU1RVREVOVCIsInVzZXJpZCI6IjIxLTM2MTExIn0.qVMtyeO9V_qiWnM9lJe8fNT9NnZPaAYVDTFgdyAstYo', 'John Aeron Latorre');
 
 --
 -- Indexes for dumped tables
@@ -115,12 +101,6 @@ ALTER TABLE `attendance_tbl`
   ADD PRIMARY KEY (`AttendanceID`);
 
 --
--- Indexes for table `course_tbl`
---
-ALTER TABLE `course_tbl`
-  ADD PRIMARY KEY (`CourseID`);
-
---
 -- Indexes for table `faculty_tbl`
 --
 ALTER TABLE `faculty_tbl`
@@ -131,6 +111,28 @@ ALTER TABLE `faculty_tbl`
 --
 ALTER TABLE `student_tbl`
   ADD PRIMARY KEY (`StudentID`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `attendance_tbl`
+--
+ALTER TABLE `attendance_tbl`
+  MODIFY `AttendanceID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT for table `faculty_tbl`
+--
+ALTER TABLE `faculty_tbl`
+  MODIFY `FacultyID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `student_tbl`
+--
+ALTER TABLE `student_tbl`
+  MODIFY `StudentID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
