@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Nov 19, 2023 at 05:50 PM
+-- Generation Time: Nov 20, 2023 at 12:43 AM
 -- Server version: 8.0.31
 -- PHP Version: 8.0.26
 
@@ -52,48 +52,59 @@ INSERT INTO `lost_items` (`id`, `item_number`, `item_name`, `date_found`, `date_
 -- --------------------------------------------------------
 
 --
--- Table structure for table `security`
+-- Table structure for table `tbemployee`
 --
 
-DROP TABLE IF EXISTS `security`;
-CREATE TABLE IF NOT EXISTS `security` (
-  `UserId` int NOT NULL AUTO_INCREMENT,
-  `username` varchar(50) NOT NULL,
-  `password` varchar(50) NOT NULL,
-  `role` enum('admin','security') DEFAULT 'security',
-  `full_name` varchar(50) NOT NULL,
-  PRIMARY KEY (`UserId`),
-  UNIQUE KEY `username` (`username`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
---
--- Dumping data for table `security`
---
-
-INSERT INTO `security` (`UserId`, `username`, `password`, `role`, `full_name`) VALUES
-(1, 'Sd2023', 'Sd2023', 'admin', 'Seurity Department 2023'),
-(2, 'Sg_jose', 'Sg_jose', 'security', 'Jose Pangilinan');
+DROP TABLE IF EXISTS `tbemployee`;
+CREATE TABLE IF NOT EXISTS `tbemployee` (
+  `empid` int NOT NULL,
+  `lastname` varchar(25) NOT NULL,
+  `firstname` varchar(25) NOT NULL,
+  `department` varchar(20) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `student`
+-- Table structure for table `tbsecurity`
 --
 
-DROP TABLE IF EXISTS `student`;
-CREATE TABLE IF NOT EXISTS `student` (
-  `StudentId` int NOT NULL AUTO_INCREMENT,
-  `Sr_code` varchar(191) NOT NULL,
+DROP TABLE IF EXISTS `tbsecurity`;
+CREATE TABLE IF NOT EXISTS `tbsecurity` (
+  `empid` int NOT NULL AUTO_INCREMENT,
+  `username` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
-  PRIMARY KEY (`StudentId`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `role` enum('admin','security') DEFAULT NULL,
+  PRIMARY KEY (`empid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- --------------------------------------------------------
 
 --
--- Dumping data for table `student`
+-- Table structure for table `tbstudent`
 --
 
-INSERT INTO `student` (`StudentId`, `Sr_code`, `password`) VALUES
-(1, '21-36991', '21-36991');
+DROP TABLE IF EXISTS `tbstudent`;
+CREATE TABLE IF NOT EXISTS `tbstudent` (
+  `studid` int NOT NULL AUTO_INCREMENT,
+  `srcode` varchar(255) DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`studid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_studentinfo`
+--
+
+DROP TABLE IF EXISTS `tb_studentinfo`;
+CREATE TABLE IF NOT EXISTS `tb_studentinfo` (
+  `studid` int NOT NULL,
+  `lastname` varchar(25) NOT NULL,
+  `firstname` varchar(25) NOT NULL,
+  `course` varchar(20) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
