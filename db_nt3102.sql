@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 20, 2023 at 01:15 AM
+-- Generation Time: Nov 20, 2023 at 08:37 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -30,7 +30,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `attendance_tbl` (
   `AttendanceID` int(11) NOT NULL,
   `FacultyID` varchar(25) NOT NULL,
-  `StudentID` varchar(25) NOT NULL,
+  `studid` varchar(25) NOT NULL,
   `AttendanceDate` varchar(25) NOT NULL,
   `ClassSection` varchar(25) NOT NULL,
   `Room` varchar(25) NOT NULL,
@@ -42,7 +42,7 @@ CREATE TABLE `attendance_tbl` (
 -- Dumping data for table `attendance_tbl`
 --
 
-INSERT INTO `attendance_tbl` (`AttendanceID`, `FacultyID`, `StudentID`, `AttendanceDate`, `ClassSection`, `Room`, `TimeStart`, `TimeEnd`) VALUES
+INSERT INTO `attendance_tbl` (`AttendanceID`, `FacultyID`, `studid`, `AttendanceDate`, `ClassSection`, `Room`, `TimeStart`, `TimeEnd`) VALUES
 (1, '1', '3', '2023-11-02', 'BSIT-NT-3102', 'CECS 503', '08:00:00.000000', '11:00:00.000000'),
 (2, '1', '2', '2023-11-02', 'BSIT-NT-3102', 'CECS 503', '08:00:00.000000', '11:00:00.000000'),
 (3, '1', '1', '2023-11-02', 'BSIT-NT-3102', 'CECS 503', '08:00:00.000000', '11:00:00.000000'),
@@ -168,7 +168,7 @@ ALTER TABLE `tbemployee`
 -- AUTO_INCREMENT for table `attendance_tbl`
 --
 ALTER TABLE `attendance_tbl`
-  MODIFY `AttendanceID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `AttendanceID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `faculty_tbl`
