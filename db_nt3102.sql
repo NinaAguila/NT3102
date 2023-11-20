@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Nov 19, 2023 at 11:43 PM
+-- Generation Time: Nov 20, 2023 at 01:30 AM
 -- Server version: 8.0.31
 -- PHP Version: 8.0.26
 
@@ -65,8 +65,8 @@ CREATE TABLE IF NOT EXISTS `atendees_view` (
 ,`eventDesc` varchar(50)
 ,`eventID` int
 ,`eventName` varchar(50)
-,`firstName` varchar(250)
-,`lastName` varchar(250)
+,`firstName` varchar(25)
+,`lastName` varchar(25)
 ,`org_ID` int
 ,`org_Name` varchar(255)
 ,`password` varchar(255)
@@ -90,11 +90,11 @@ CREATE TABLE IF NOT EXISTS `atendees_view` (
 DROP TABLE IF EXISTS `course`;
 CREATE TABLE IF NOT EXISTS `course` (
   `courseID` int NOT NULL AUTO_INCREMENT,
-  `courseName` text COLLATE utf8mb4_general_ci NOT NULL,
+  `courseName` text NOT NULL,
   `dept_ID` int NOT NULL,
   PRIMARY KEY (`courseID`),
   KEY `dept_ID` (`dept_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `course`
@@ -120,9 +120,9 @@ INSERT INTO `course` (`courseID`, `courseName`, `dept_ID`) VALUES
 DROP TABLE IF EXISTS `department`;
 CREATE TABLE IF NOT EXISTS `department` (
   `dept_ID` int NOT NULL AUTO_INCREMENT,
-  `department_Name` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
+  `department_Name` varchar(100) NOT NULL,
   PRIMARY KEY (`dept_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `department`
@@ -145,26 +145,18 @@ INSERT INTO `department` (`dept_ID`, `department_Name`) VALUES
 
 DROP TABLE IF EXISTS `eventattendees`;
 CREATE TABLE IF NOT EXISTS `eventattendees` (
-  `attendeeID` int NOT NULL AUTO_INCREMENT,
+  `attendeeID` int NOT NULL,
   `eventID` int NOT NULL,
-  `sr_code` varchar(11) COLLATE utf8mb4_general_ci NOT NULL,
-  `DateRegistered` timestamp NOT NULL,
-  PRIMARY KEY (`attendeeID`),
-  KEY `eventID` (`eventID`),
-  KEY `sr_code` (`sr_code`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `sr_code` varchar(11) NOT NULL,
+  `DateRegistered` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `eventattendees`
 --
 
 INSERT INTO `eventattendees` (`attendeeID`, `eventID`, `sr_code`, `DateRegistered`) VALUES
-(1, 1, '21-33470', '2023-11-18 16:00:00'),
-(2, 1, '21-33273', '2023-11-19 14:08:10'),
-(3, 1, '21-33273', '2023-11-19 14:08:18'),
-(4, 1, '21-33273', '2023-11-19 14:08:28'),
-(5, 1, '21-33273', '2023-11-19 14:08:31'),
-(6, 1, '21-33273', '2023-11-19 14:08:33');
+(1, 1, '21-33273', '2023-11-20 01:28:13');
 
 -- --------------------------------------------------------
 
@@ -175,14 +167,14 @@ INSERT INTO `eventattendees` (`attendeeID`, `eventID`, `sr_code`, `DateRegistere
 DROP TABLE IF EXISTS `eventrecords`;
 CREATE TABLE IF NOT EXISTS `eventrecords` (
   `recordID` int NOT NULL AUTO_INCREMENT,
-  `eventID` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `remarks` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `eventID` varchar(255) DEFAULT NULL,
+  `remarks` varchar(255) NOT NULL,
   `superID` int NOT NULL,
   PRIMARY KEY (`recordID`),
   KEY `superID` (`superID`),
   KEY `statusID` (`eventID`(250)),
   KEY `fk_eventID` (`eventID`(250))
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `eventrecords`
@@ -200,22 +192,23 @@ INSERT INTO `eventrecords` (`recordID`, `eventID`, `remarks`, `superID`) VALUES
 DROP TABLE IF EXISTS `events`;
 CREATE TABLE IF NOT EXISTS `events` (
   `eventID` int NOT NULL AUTO_INCREMENT,
-  `eventName` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
-  `eventDesc` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `eventName` varchar(50) NOT NULL,
+  `eventDesc` varchar(50) NOT NULL,
   `org_ID` int NOT NULL,
   `statusID` int NOT NULL,
   `e_date` datetime NOT NULL,
   PRIMARY KEY (`eventID`),
   KEY `org_ID` (`org_ID`),
   KEY `statusID` (`statusID`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `events`
 --
 
 INSERT INTO `events` (`eventID`, `eventName`, `eventDesc`, `org_ID`, `statusID`, `e_date`) VALUES
-(1, 'sample', 'sample', 1, 1, '2023-11-19 09:32:12');
+(1, 'sample', 'sample', 1, 1, '2023-11-19 09:32:12'),
+(2, 'sample2', 'sample3', 1, 1, '2023-11-19 13:44:43');
 
 -- --------------------------------------------------------
 
@@ -226,9 +219,9 @@ INSERT INTO `events` (`eventID`, `eventName`, `eventDesc`, `org_ID`, `statusID`,
 DROP TABLE IF EXISTS `eventstatus`;
 CREATE TABLE IF NOT EXISTS `eventstatus` (
   `statusID` int NOT NULL AUTO_INCREMENT,
-  `status` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `status` varchar(255) NOT NULL,
   PRIMARY KEY (`statusID`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `eventstatus`
@@ -282,12 +275,12 @@ DROP TABLE IF EXISTS `organization`;
 CREATE TABLE IF NOT EXISTS `organization` (
   `org_ID` int NOT NULL AUTO_INCREMENT,
   `dept_ID` int NOT NULL,
-  `org_Name` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `org_Name` varchar(255) NOT NULL,
   `superID` int NOT NULL,
   PRIMARY KEY (`org_ID`),
   KEY `superID` (`superID`),
   KEY `dept_ID` (`dept_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `organization`
@@ -325,12 +318,13 @@ CREATE TABLE IF NOT EXISTS `studentinfoview` (
 ,`courseName` text
 ,`department_Name` varchar(100)
 ,`dept_ID` int
-,`firstName` varchar(250)
-,`lastName` varchar(250)
+,`firstName` varchar(25)
+,`lastName` varchar(25)
 ,`password` varchar(255)
 ,`salt` varchar(10)
 ,`section` varchar(250)
 ,`sr_code` varchar(250)
+,`stud_id` int
 ,`userID` int
 ,`year` varchar(255)
 );
@@ -343,23 +337,23 @@ CREATE TABLE IF NOT EXISTS `studentinfoview` (
 
 DROP TABLE IF EXISTS `students`;
 CREATE TABLE IF NOT EXISTS `students` (
-  `sr_code` varchar(250) COLLATE utf8mb4_general_ci NOT NULL,
-  `firstName` varchar(250) COLLATE utf8mb4_general_ci NOT NULL,
-  `lastName` varchar(250) COLLATE utf8mb4_general_ci NOT NULL,
+  `sr_code` varchar(250) NOT NULL,
   `courseID` int NOT NULL,
-  `year` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
-  `section` varchar(250) COLLATE utf8mb4_general_ci NOT NULL,
+  `year` varchar(255) NOT NULL,
+  `section` varchar(250) NOT NULL,
+  `stud_id` int NOT NULL,
   PRIMARY KEY (`sr_code`),
-  KEY `courseID` (`courseID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  KEY `courseID` (`courseID`),
+  KEY `stud_id` (`stud_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `students`
 --
 
-INSERT INTO `students` (`sr_code`, `firstName`, `lastName`, `courseID`, `year`, `section`) VALUES
-('21-33273', 'Aleister', 'Alinsunurin', 6, '3rd', 'NT-3102'),
-('21-33470', 'Emjay', 'Rongavilla', 6, '3rd', 'NT-3102');
+INSERT INTO `students` (`sr_code`, `courseID`, `year`, `section`, `stud_id`) VALUES
+('21-33273', 6, '3rd', 'NT-3102', 1),
+('21-33470', 6, '3rd', 'NT-3102', 2);
 
 -- --------------------------------------------------------
 
@@ -370,11 +364,11 @@ INSERT INTO `students` (`sr_code`, `firstName`, `lastName`, `courseID`, `year`, 
 DROP TABLE IF EXISTS `superusers`;
 CREATE TABLE IF NOT EXISTS `superusers` (
   `superID` int NOT NULL AUTO_INCREMENT,
-  `userName` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
-  `password` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
-  `salt` varchar(10) COLLATE utf8mb4_general_ci NOT NULL,
+  `userName` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `salt` varchar(10) NOT NULL,
   PRIMARY KEY (`superID`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `superusers`
@@ -395,10 +389,10 @@ INSERT INTO `superusers` (`superID`, `userName`, `password`, `salt`) VALUES
 DROP TABLE IF EXISTS `tbemployee`;
 CREATE TABLE IF NOT EXISTS `tbemployee` (
   `empid` int NOT NULL,
-  `lastname` varchar(25) COLLATE utf8mb4_general_ci NOT NULL,
-  `firstname` varchar(25) COLLATE utf8mb4_general_ci NOT NULL,
-  `department` varchar(20) COLLATE utf8mb4_general_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `lastname` varchar(25) NOT NULL,
+  `firstname` varchar(25) NOT NULL,
+  `department` varchar(20) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
@@ -409,17 +403,19 @@ CREATE TABLE IF NOT EXISTS `tbemployee` (
 DROP TABLE IF EXISTS `tb_studentinfo`;
 CREATE TABLE IF NOT EXISTS `tb_studentinfo` (
   `studid` int NOT NULL,
-  `lastname` varchar(25) COLLATE utf8mb4_general_ci NOT NULL,
-  `firstname` varchar(25) COLLATE utf8mb4_general_ci NOT NULL,
-  `course` varchar(20) COLLATE utf8mb4_general_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `lastname` varchar(25) NOT NULL,
+  `firstname` varchar(25) NOT NULL,
+  `course` varchar(20) NOT NULL,
+  PRIMARY KEY (`studid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `tb_studentinfo`
 --
 
 INSERT INTO `tb_studentinfo` (`studid`, `lastname`, `firstname`, `course`) VALUES
-(1, 'parker', 'peter', 'bsit');
+(1, 'Aleister', 'Alinsunurin', 'BSIT'),
+(2, 'Emjay', 'Rongavilla', 'BSIT');
 
 -- --------------------------------------------------------
 
@@ -429,13 +425,13 @@ INSERT INTO `tb_studentinfo` (`studid`, `lastname`, `firstname`, `course`) VALUE
 
 DROP TABLE IF EXISTS `userstudents`;
 CREATE TABLE IF NOT EXISTS `userstudents` (
-  `userID` int NOT NULL AUTO_INCREMENT,
-  `sr_code` varchar(250) COLLATE utf8mb4_general_ci NOT NULL,
-  `password` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
-  `salt` varchar(10) COLLATE utf8mb4_general_ci NOT NULL,
+  `userID` int NOT NULL,
+  `sr_code` varchar(250) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `salt` varchar(10) NOT NULL,
   PRIMARY KEY (`userID`),
   KEY `sr_code` (`sr_code`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `userstudents`
@@ -443,7 +439,7 @@ CREATE TABLE IF NOT EXISTS `userstudents` (
 
 INSERT INTO `userstudents` (`userID`, `sr_code`, `password`, `salt`) VALUES
 (1, '21-33470', 'e0999eedf060a2ee05ab267bdb52f827b5f0174d839ac30eae6cd235392531f6', '1ea831d0d9'),
-(3, '21-33273', 'a46509693cff178f34647bb3bdf3b8fffcf36b75e102b9fabeba3417632f7366', '00d8bf7d8b');
+(3, '21-33273', 'e0999eedf060a2ee05ab267bdb52f827b5f0174d839ac30eae6cd235392531f6', '1ea831d0d9');
 
 -- --------------------------------------------------------
 
@@ -453,7 +449,7 @@ INSERT INTO `userstudents` (`userID`, `sr_code`, `password`, `salt`) VALUES
 DROP TABLE IF EXISTS `atendees_view`;
 
 DROP VIEW IF EXISTS `atendees_view`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `atendees_view`  AS SELECT `studentinfoview`.`userID` AS `userID`, `studentinfoview`.`sr_code` AS `sr_code`, `studentinfoview`.`password` AS `password`, `studentinfoview`.`salt` AS `salt`, `studentinfoview`.`firstName` AS `firstName`, `studentinfoview`.`lastName` AS `lastName`, `studentinfoview`.`courseID` AS `courseID`, `studentinfoview`.`year` AS `year`, `studentinfoview`.`section` AS `section`, `studentinfoview`.`courseName` AS `courseName`, `studentinfoview`.`dept_ID` AS `dept_ID`, `studentinfoview`.`department_Name` AS `stud_dept`, `event_info`.`statusID` AS `statusID`, `event_info`.`status` AS `status`, `eventattendees`.`eventID` AS `stud_deptid`, `event_info`.`eventName` AS `eventName`, `event_info`.`eventDesc` AS `eventDesc`, `event_info`.`org_ID` AS `org_ID`, `event_info`.`e_date` AS `e_date`, `event_info`.`department_Name` AS `department_Name`, `event_info`.`dept_ID` AS `event_deptid`, `event_info`.`org_Name` AS `org_Name`, `eventattendees`.`attendeeID` AS `attendeeID`, `eventattendees`.`eventID` AS `eventID`, `eventattendees`.`DateRegistered` AS `DateRegistered` FROM ((`eventattendees` join `event_info` on((`event_info`.`eventID` = `eventattendees`.`eventID`))) join `studentinfoview` on((`studentinfoview`.`userID` = `eventattendees`.`attendeeID`)))  ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `atendees_view`  AS SELECT `studentinfoview`.`userID` AS `userID`, `studentinfoview`.`sr_code` AS `sr_code`, `studentinfoview`.`password` AS `password`, `studentinfoview`.`salt` AS `salt`, `studentinfoview`.`firstName` AS `firstName`, `studentinfoview`.`lastName` AS `lastName`, `studentinfoview`.`courseID` AS `courseID`, `studentinfoview`.`year` AS `year`, `studentinfoview`.`section` AS `section`, `studentinfoview`.`courseName` AS `courseName`, `studentinfoview`.`dept_ID` AS `dept_ID`, `studentinfoview`.`department_Name` AS `stud_dept`, `event_info`.`statusID` AS `statusID`, `event_info`.`status` AS `status`, `eventattendees`.`eventID` AS `stud_deptid`, `event_info`.`eventName` AS `eventName`, `event_info`.`eventDesc` AS `eventDesc`, `event_info`.`org_ID` AS `org_ID`, `event_info`.`e_date` AS `e_date`, `event_info`.`department_Name` AS `department_Name`, `event_info`.`dept_ID` AS `event_deptid`, `event_info`.`org_Name` AS `org_Name`, `eventattendees`.`attendeeID` AS `attendeeID`, `eventattendees`.`eventID` AS `eventID`, `eventattendees`.`DateRegistered` AS `DateRegistered` FROM (((`eventattendees` join `event_info` on((`event_info`.`eventID` = `eventattendees`.`eventID`))) join `studentinfoview` on((`studentinfoview`.`sr_code` = `eventattendees`.`sr_code`))) join `tb_studentinfo` on((`tb_studentinfo`.`studid` = `studentinfoview`.`stud_id`))) GROUP BY `eventattendees`.`attendeeID``attendeeID`  ;
 
 -- --------------------------------------------------------
 
@@ -483,7 +479,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 DROP TABLE IF EXISTS `studentinfoview`;
 
 DROP VIEW IF EXISTS `studentinfoview`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `studentinfoview`  AS SELECT `userstudents`.`userID` AS `userID`, `students`.`sr_code` AS `sr_code`, `userstudents`.`password` AS `password`, `userstudents`.`salt` AS `salt`, `students`.`firstName` AS `firstName`, `students`.`lastName` AS `lastName`, `course`.`courseID` AS `courseID`, `students`.`year` AS `year`, `students`.`section` AS `section`, `course`.`courseName` AS `courseName`, `department`.`dept_ID` AS `dept_ID`, `department`.`department_Name` AS `department_Name` FROM (((`userstudents` join `students` on((`students`.`sr_code` = `userstudents`.`sr_code`))) join `course` on((`course`.`courseID` = `students`.`courseID`))) join `department` on((`department`.`dept_ID` = `course`.`dept_ID`)))  ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `studentinfoview`  AS SELECT `userstudents`.`userID` AS `userID`, `students`.`sr_code` AS `sr_code`, `userstudents`.`password` AS `password`, `userstudents`.`salt` AS `salt`, `tb_studentinfo`.`firstname` AS `firstName`, `tb_studentinfo`.`lastname` AS `lastName`, `course`.`courseID` AS `courseID`, `students`.`year` AS `year`, `students`.`section` AS `section`, `course`.`courseName` AS `courseName`, `department`.`dept_ID` AS `dept_ID`, `department`.`department_Name` AS `department_Name`, `students`.`stud_id` AS `stud_id` FROM ((((`userstudents` join `students` on((`students`.`sr_code` = `userstudents`.`sr_code`))) join `course` on((`course`.`courseID` = `students`.`courseID`))) join `department` on((`department`.`dept_ID` = `course`.`dept_ID`))) join `tb_studentinfo` on((`tb_studentinfo`.`studid` = `students`.`stud_id`)))  ;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
