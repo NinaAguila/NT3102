@@ -3,8 +3,8 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Oct 27, 2023 at 09:13 AM
--- Server version: 8.0.31
+-- Generation Time: Nov 20, 2023 at 01:30 AM
+-- Server version: 8.0.34
 -- PHP Version: 8.0.26
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -29,14 +29,13 @@ SET time_zone = "+00:00";
 
 DROP TABLE IF EXISTS `admin`;
 CREATE TABLE IF NOT EXISTS `admin` (
-  `adminID` int NOT NULL AUTO_INCREMENT,
+  `adminID` int NOT NULL,
   `adminFN` text,
   `adminLN` text,
-  `adminAddress` text,
-  `adminPH` text,
-  `salt` text,
+  `adminEmailAddress` text,
+  `adminPassword` text,
   PRIMARY KEY (`adminID`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
@@ -47,9 +46,19 @@ CREATE TABLE IF NOT EXISTS `admin` (
 DROP TABLE IF EXISTS `author`;
 CREATE TABLE IF NOT EXISTS `author` (
   `authorID` int NOT NULL AUTO_INCREMENT,
-  `authorName` text,
+  `authorFn` text COLLATE utf8mb4_general_ci,
+  `authorLn` text COLLATE utf8mb4_general_ci,
   PRIMARY KEY (`authorID`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `author`
+--
+
+INSERT INTO `author` (`authorID`, `authorFn`, `authorLn`) VALUES
+(2, 'Aia', 'Amare'),
+(3, 'Fulgur', 'Ovid'),
+(4, 'John', 'Doe');
 
 -- --------------------------------------------------------
 
@@ -62,32 +71,31 @@ CREATE TABLE IF NOT EXISTS `book` (
   `bookID` int NOT NULL AUTO_INCREMENT,
   `authorID` int DEFAULT NULL,
   `publisherID` int DEFAULT NULL,
-  `bookTitle` text,
-  `ISBN` text,
-  `description` longtext,
-  `genre` text,
+  `bookTitle` text COLLATE utf8mb4_general_ci,
+  `ISBN` text COLLATE utf8mb4_general_ci,
+  `description` longtext COLLATE utf8mb4_general_ci,
+  `genre` text COLLATE utf8mb4_general_ci,
   `publishDate` date DEFAULT NULL,
   `quantity` int DEFAULT NULL,
+  `goodbook` int NOT NULL,
+  `badbook` int NOT NULL,
   PRIMARY KEY (`bookID`),
   KEY `authorID` (`authorID`),
   KEY `publisherID` (`publisherID`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
--- --------------------------------------------------------
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Table structure for table `bookcondition`
+-- Dumping data for table `book`
 --
 
-DROP TABLE IF EXISTS `bookcondition`;
-CREATE TABLE IF NOT EXISTS `bookcondition` (
-  `statusID` int NOT NULL AUTO_INCREMENT,
-  `State` text,
-  `bookID` int DEFAULT NULL,
-  `count` int DEFAULT NULL,
-  PRIMARY KEY (`statusID`),
-  KEY `bookID` (`bookID`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+INSERT INTO `book` (`bookID`, `authorID`, `publisherID`, `bookTitle`, `ISBN`, `description`, `genre`, `publishDate`, `quantity`, `goodbook`, `badbook`) VALUES
+(1, 2, 1, 'Dork', '0-2029-2791-1', 'ILUNA Institute of the Mystics 2nd Year.\r\nAn angelic maiden who descended from Heaven to observe mankind.\r\nHer gentle appearance hides a rather mischievous disposition 1', 'Non-Fiction', '2023-01-01', 10, 5, 5),
+(2, 3, 2, 'Legatus 404', '0-1260-6478-4', 'A Cyborg from the future with unparalleled strength.\r\nHis body is partly cold steel, and who is to say if he has a heart', 'Fiction', '2023-02-02', 20, 10, 10),
+(3, 4, 3, 'though Doe', '0-4319-1393-5', 'A typical AI generated name', 'Comedy', '2023-03-03', 30, 20, 10),
+(4, NULL, NULL, 'Flat is justice', '2312314', 'witch', 'Fantasy', '2023-11-23', 1312, 1, 1),
+(5, NULL, NULL, 'Flat is justice', '2312314', 'witch', 'Fantasy', '2023-11-10', 2, 3, 4),
+(6, 2, NULL, 'Flat is justice', '2312314', 'dawa', 'Fiction', '2023-11-02', 4, 2, 2),
+(7, 2, NULL, 'Flat is justice', '2312314', 'dawa', 'Fiction', '2023-11-02', 4, 2, 2);
 
 -- --------------------------------------------------------
 
@@ -100,11 +108,10 @@ CREATE TABLE IF NOT EXISTS `librarian` (
   `libID` int NOT NULL AUTO_INCREMENT,
   `libFN` text,
   `libLN` text,
-  `librarianAddress` text,
-  `librarianPH` text,
-  `salt` text,
+  `librarianEmail` text,
+  `librarianPassword` text,
   PRIMARY KEY (`libID`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
@@ -115,10 +122,19 @@ CREATE TABLE IF NOT EXISTS `librarian` (
 DROP TABLE IF EXISTS `publisher`;
 CREATE TABLE IF NOT EXISTS `publisher` (
   `publisherID` int NOT NULL AUTO_INCREMENT,
-  `publisherName` text,
-  `publisherAddress` text,
+  `publisherName` text COLLATE utf8mb4_general_ci,
+  `publisherAddress` text COLLATE utf8mb4_general_ci,
   PRIMARY KEY (`publisherID`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `publisher`
+--
+
+INSERT INTO `publisher` (`publisherID`, `publisherName`, `publisherAddress`) VALUES
+(1, 'ABC Production', 'Cuenca, Batangas'),
+(2, 'Victory', 'Lipa City, Batangas'),
+(3, 'Modico', 'Biñan, Laguna');
 
 -- --------------------------------------------------------
 
@@ -132,7 +148,7 @@ CREATE TABLE IF NOT EXISTS `tbemployee` (
   `lastname` varchar(25) NOT NULL,
   `firstname` varchar(25) NOT NULL,
   `department` varchar(20) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
@@ -146,14 +162,7 @@ CREATE TABLE IF NOT EXISTS `tb_studentinfo` (
   `lastname` varchar(25) NOT NULL,
   `firstname` varchar(25) NOT NULL,
   `course` varchar(20) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
---
--- Dumping data for table `tb_studentinfo`
---
-
-INSERT INTO `tb_studentinfo` (`studid`, `lastname`, `firstname`, `course`) VALUES
-(1, 'parker', 'peter', 'bsit');
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
@@ -164,29 +173,23 @@ INSERT INTO `tb_studentinfo` (`studid`, `lastname`, `firstname`, `course`) VALUE
 DROP TABLE IF EXISTS `updatelog`;
 CREATE TABLE IF NOT EXISTS `updatelog` (
   `updateID` int NOT NULL AUTO_INCREMENT,
-  `activity` text,
-  `entityType` text,
+  `action` text COLLATE utf8mb4_general_ci,
+  `entityType` text COLLATE utf8mb4_general_ci,
   `entityID` int DEFAULT NULL,
-  `printDate` datetime DEFAULT NULL,
+  `timestamp` datetime DEFAULT NULL,
   PRIMARY KEY (`updateID`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
--- --------------------------------------------------------
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Table structure for table `usertbl`
+-- Constraints for dumped tables
 --
 
-DROP TABLE IF EXISTS `usertbl`;
-CREATE TABLE IF NOT EXISTS `usertbl` (
-  `userID` int NOT NULL AUTO_INCREMENT,
-  `userFN` text,
-  `userLN` text,
-  `userAddress` text,
-  `userPH` text,
-  `salt` text,
-  PRIMARY KEY (`userID`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+--
+-- Constraints for table `book`
+--
+ALTER TABLE `book`
+  ADD CONSTRAINT `book_ibfk_1` FOREIGN KEY (`authorID`) REFERENCES `author` (`authorID`),
+  ADD CONSTRAINT `book_ibfk_2` FOREIGN KEY (`publisherID`) REFERENCES `publisher` (`publisherID`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
