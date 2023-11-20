@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 20, 2023 at 12:40 AM
+-- Generation Time: Nov 20, 2023 at 01:31 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.1.12
 
@@ -78,26 +78,31 @@ CREATE TABLE `product` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user_data`
+-- Table structure for table `tbemployee`
 --
 
-CREATE TABLE `user_data` (
-  `User_ID` int(255) NOT NULL,
-  `User_Code` varchar(100) DEFAULT NULL,
-  `Last_Name` varchar(100) DEFAULT NULL,
-  `First_Name` varchar(100) DEFAULT NULL,
-  `User_Type` varchar(100) DEFAULT NULL,
-  `Classification` varchar(100) DEFAULT NULL
+CREATE TABLE `tbemployee` (
+  `empid` int(11) NOT NULL,
+  `lastname` varchar(25) NOT NULL,
+  `firstname` varchar(25) NOT NULL,
+  `department` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+-- --------------------------------------------------------
+
 --
--- Dumping data for table `user_data`
+-- Table structure for table `tb_studentinfo`
 --
 
-INSERT INTO `user_data` (`User_ID`, `User_Code`, `Last_Name`, `First_Name`, `User_Type`, `Classification`) VALUES
-(3, '1234', 'Tatum', 'Jason', 'Admin', 'Shop Admin'),
-(4, 'umay', 'Sagan', 'Peter', 'User', 'Student'),
-(5, 'kimi', 'Chu', 'Kimi', 'RGO Admin', 'RGO Staff');
+CREATE TABLE `tb_studentinfo` (
+  `User_ID` int(255) NOT NULL,
+  `studid` int(11) DEFAULT NULL,
+  `lastname` varchar(25) DEFAULT NULL,
+  `firstname` varchar(25) DEFAULT NULL,
+  `User_Type` varchar(100) DEFAULT NULL,
+  `Classification` varchar(100) DEFAULT NULL,
+  `course` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -111,15 +116,6 @@ CREATE TABLE `user_login` (
   `User_Email` varchar(100) DEFAULT NULL,
   `User_Password` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `user_login`
---
-
-INSERT INTO `user_login` (`User_ID`, `User_Type`, `User_Email`, `User_Password`) VALUES
-(3, 'Admin', '1234@g.batstate-u.edu.ph', 'admin'),
-(4, 'User', 'umay@g.batstate-u.edu.ph', 'umay'),
-(5, 'RGO Admin', 'kimi@g.batstate-u.edu.ph', 'admin');
 
 --
 -- Indexes for dumped tables
@@ -150,9 +146,9 @@ ALTER TABLE `product`
   ADD PRIMARY KEY (`Product_ID`);
 
 --
--- Indexes for table `user_data`
+-- Indexes for table `tb_studentinfo`
 --
-ALTER TABLE `user_data`
+ALTER TABLE `tb_studentinfo`
   ADD PRIMARY KEY (`User_ID`);
 
 --
@@ -190,16 +186,16 @@ ALTER TABLE `product`
   MODIFY `Product_ID` int(100) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `user_data`
+-- AUTO_INCREMENT for table `tb_studentinfo`
 --
-ALTER TABLE `user_data`
-  MODIFY `User_ID` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+ALTER TABLE `tb_studentinfo`
+  MODIFY `User_ID` int(255) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `user_login`
 --
 ALTER TABLE `user_login`
-  MODIFY `User_ID` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `User_ID` int(255) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
