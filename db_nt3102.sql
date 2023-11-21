@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Nov 20, 2023 at 01:30 AM
+-- Generation Time: Nov 21, 2023 at 08:43 AM
 -- Server version: 8.0.31
 -- PHP Version: 8.0.26
 
@@ -280,7 +280,7 @@ CREATE TABLE IF NOT EXISTS `organization` (
   PRIMARY KEY (`org_ID`),
   KEY `superID` (`superID`),
   KEY `dept_ID` (`dept_ID`)
-) ENGINE=MyISAM AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `organization`
@@ -304,7 +304,8 @@ INSERT INTO `organization` (`org_ID`, `dept_ID`, `org_Name`, `superID`) VALUES
 (15, 5, 'Language Educators Association', 15),
 (16, 6, 'Junior Philippine Institute of Industrial Engineers', 16),
 (17, 0, 'Red Spartan Sports Council', 17),
-(18, 0, 'Supreme Student Council Lipa Campus', 18);
+(18, 0, 'Supreme Student Council Lipa Campus', 18),
+(19, 4, 'Tech Innovator Society', 5);
 
 -- --------------------------------------------------------
 
@@ -368,7 +369,7 @@ CREATE TABLE IF NOT EXISTS `superusers` (
   `password` varchar(255) NOT NULL,
   `salt` varchar(10) NOT NULL,
   PRIMARY KEY (`superID`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `superusers`
@@ -378,7 +379,8 @@ INSERT INTO `superusers` (`superID`, `userName`, `password`, `salt`) VALUES
 (0, 'adminval', '95e1d817e753fe6392b68de89c337e4cbcf63d280e77245d5c7a3fc4938863d9', 'kckKVzx9k1'),
 (1, 'JPAMA', '3913342ed7e247f86dc7bf83229b90a0cec7d8f7f9a6851927f7becc7fec9035', 'b79dc59cf1'),
 (2, 'JME', '18d7d94a8343f46b943d963da0d1b8bb42520ba84d4329280be02e5c542a9ee4', 'fc39983032'),
-(3, 'CABE Council', '423a577e2d08ee38ad7969840840efd3ebc0adde65ccce896eb93c3d2c491fc8', '02eb527701');
+(3, 'CABE Council', '423a577e2d08ee38ad7969840840efd3ebc0adde65ccce896eb93c3d2c491fc8', '02eb527701'),
+(5, 'Tech Innovators Society', '5060f9a146da6d1494d1a6f6cf9de3c43c0c8d49a8561ddddb6332a305cec951', 'da0fd7826c');
 
 -- --------------------------------------------------------
 
