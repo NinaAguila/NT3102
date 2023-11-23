@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Nov 20, 2023 at 01:30 AM
+-- Generation Time: Nov 22, 2023 at 03:05 AM
 -- Server version: 8.0.31
 -- PHP Version: 8.0.26
 
@@ -324,7 +324,6 @@ CREATE TABLE IF NOT EXISTS `studentinfoview` (
 ,`salt` varchar(10)
 ,`section` varchar(250)
 ,`sr_code` varchar(250)
-,`stud_id` int
 ,`userID` int
 ,`year` varchar(255)
 );
@@ -347,13 +346,6 @@ CREATE TABLE IF NOT EXISTS `students` (
   KEY `stud_id` (`stud_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
---
--- Dumping data for table `students`
---
-
-INSERT INTO `students` (`sr_code`, `courseID`, `year`, `section`, `stud_id`) VALUES
-('21-33273', 6, '3rd', 'NT-3102', 1),
-('21-33470', 6, '3rd', 'NT-3102', 2);
 
 -- --------------------------------------------------------
 
@@ -402,20 +394,13 @@ CREATE TABLE IF NOT EXISTS `tbemployee` (
 
 DROP TABLE IF EXISTS `tb_studentinfo`;
 CREATE TABLE IF NOT EXISTS `tb_studentinfo` (
-  `studid` int NOT NULL,
+  `studid` int AUTO_INCREMENT NOT NULL,
   `lastname` varchar(25) NOT NULL,
   `firstname` varchar(25) NOT NULL,
   `course` varchar(20) NOT NULL,
   PRIMARY KEY (`studid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
---
--- Dumping data for table `tb_studentinfo`
---
-
-INSERT INTO `tb_studentinfo` (`studid`, `lastname`, `firstname`, `course`) VALUES
-(1, 'Aleister', 'Alinsunurin', 'BSIT'),
-(2, 'Emjay', 'Rongavilla', 'BSIT');
 
 -- --------------------------------------------------------
 
@@ -425,7 +410,7 @@ INSERT INTO `tb_studentinfo` (`studid`, `lastname`, `firstname`, `course`) VALUE
 
 DROP TABLE IF EXISTS `userstudents`;
 CREATE TABLE IF NOT EXISTS `userstudents` (
-  `userID` int NOT NULL,
+  `userID` int AUTO_INCREMENT NOT NULL,
   `sr_code` varchar(250) NOT NULL,
   `password` varchar(255) NOT NULL,
   `salt` varchar(10) NOT NULL,
@@ -449,8 +434,26 @@ INSERT INTO `userstudents` (`userID`, `sr_code`, `password`, `salt`) VALUES
 DROP TABLE IF EXISTS `atendees_view`;
 
 DROP VIEW IF EXISTS `atendees_view`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `atendees_view`  AS SELECT `studentinfoview`.`userID` AS `userID`, `studentinfoview`.`sr_code` AS `sr_code`, `studentinfoview`.`password` AS `password`, `studentinfoview`.`salt` AS `salt`, `studentinfoview`.`firstName` AS `firstName`, `studentinfoview`.`lastName` AS `lastName`, `studentinfoview`.`courseID` AS `courseID`, `studentinfoview`.`year` AS `year`, `studentinfoview`.`section` AS `section`, `studentinfoview`.`courseName` AS `courseName`, `studentinfoview`.`dept_ID` AS `dept_ID`, `studentinfoview`.`department_Name` AS `stud_dept`, `event_info`.`statusID` AS `statusID`, `event_info`.`status` AS `status`, `eventattendees`.`eventID` AS `stud_deptid`, `event_info`.`eventName` AS `eventName`, `event_info`.`eventDesc` AS `eventDesc`, `event_info`.`org_ID` AS `org_ID`, `event_info`.`e_date` AS `e_date`, `event_info`.`department_Name` AS `department_Name`, `event_info`.`dept_ID` AS `event_deptid`, `event_info`.`org_Name` AS `org_Name`, `eventattendees`.`attendeeID` AS `attendeeID`, `eventattendees`.`eventID` AS `eventID`, `eventattendees`.`DateRegistered` AS `DateRegistered` FROM (((`eventattendees` join `event_info` on((`event_info`.`eventID` = `eventattendees`.`eventID`))) join `studentinfoview` on((`studentinfoview`.`sr_code` = `eventattendees`.`sr_code`))) join `tb_studentinfo` on((`tb_studentinfo`.`studid` = `studentinfoview`.`stud_id`))) GROUP BY `eventattendees`.`attendeeID``attendeeID`  ;
-
+CREATE VIEW `atendees_view` AS
+SELECT 
+    `studentinfoview`.`userID` AS `userID`,
+    -- (other columns)
+    `event_info`.`eventID` AS `stud_deptid`,
+    -- (other columns)
+    `event_info`.`eventName` AS `eventName`,
+    `event_info`.`eventDesc` AS `eventDesc`,
+    -- (other columns)
+    `event_info`.`department_Name` AS `department_Name`,
+    `event_info`.`dept_ID` AS `event_deptid`,
+    `event_info`.`org_Name` AS `org_Name`,
+    `eventattendees`.`attendeeID` AS `attendeeID`,
+    `eventattendees`.`eventID` AS `eventID`,
+    `eventattendees`.`DateRegistered` AS `DateRegistered`
+FROM
+    (`eventattendees`
+    JOIN `event_info` ON `event_info`.`eventID` = `eventattendees`.`eventID`)
+    JOIN `studentinfoview` ON `studentinfoview`.`sr_code` = `eventattendees`.`sr_code`
+GROUP BY `eventattendees`.`attendeeID`, `eventattendees`.`eventID`;
 -- --------------------------------------------------------
 
 --
@@ -459,7 +462,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 DROP TABLE IF EXISTS `event_info`;
 
 DROP VIEW IF EXISTS `event_info`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `event_info`  AS SELECT `eventstatus`.`statusID` AS `statusID`, `eventstatus`.`status` AS `status`, `events`.`eventID` AS `eventID`, `events`.`eventName` AS `eventName`, `events`.`eventDesc` AS `eventDesc`, `events`.`org_ID` AS `org_ID`, `events`.`e_date` AS `e_date`, `department`.`department_Name` AS `department_Name`, `organization`.`dept_ID` AS `dept_ID`, `organization`.`org_Name` AS `org_Name` FROM (((`eventstatus` join `events` on((`eventstatus`.`statusID` = `events`.`eventID`))) join `organization` on((`organization`.`org_ID` = `events`.`org_ID`))) join `department` on((`department`.`dept_ID` = `organization`.`dept_ID`)))  ;
+CREATE VIEW `event_info`  AS SELECT `eventstatus`.`statusID` AS `statusID`, `eventstatus`.`status` AS `status`, `events`.`eventID` AS `eventID`, `events`.`eventName` AS `eventName`, `events`.`eventDesc` AS `eventDesc`, `events`.`org_ID` AS `org_ID`, `events`.`e_date` AS `e_date`, `department`.`department_Name` AS `department_Name`, `organization`.`dept_ID` AS `dept_ID`, `organization`.`org_Name` AS `org_Name` FROM (((`eventstatus` join `events` on((`eventstatus`.`statusID` = `events`.`eventID`))) join `organization` on((`organization`.`org_ID` = `events`.`org_ID`))) join `department` on((`department`.`dept_ID` = `organization`.`dept_ID`)))  ;
 
 -- --------------------------------------------------------
 
@@ -469,7 +472,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 DROP TABLE IF EXISTS `moderators`;
 
 DROP VIEW IF EXISTS `moderators`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `moderators`  AS SELECT `superusers`.`superID` AS `superID`, `superusers`.`userName` AS `username`, `organization`.`org_Name` AS `org_Name` FROM (`organization` join `superusers` on((`organization`.`superID` = `superusers`.`superID`)))  ;
+CREATE VIEW `moderators`  AS SELECT `superusers`.`superID` AS `superID`, `superusers`.`userName` AS `username`, `organization`.`org_Name` AS `org_Name` FROM (`organization` join `superusers` on((`organization`.`superID` = `superusers`.`superID`)))  ;
 
 -- --------------------------------------------------------
 
@@ -479,9 +482,61 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 DROP TABLE IF EXISTS `studentinfoview`;
 
 DROP VIEW IF EXISTS `studentinfoview`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `studentinfoview`  AS SELECT `userstudents`.`userID` AS `userID`, `students`.`sr_code` AS `sr_code`, `userstudents`.`password` AS `password`, `userstudents`.`salt` AS `salt`, `tb_studentinfo`.`firstname` AS `firstName`, `tb_studentinfo`.`lastname` AS `lastName`, `course`.`courseID` AS `courseID`, `students`.`year` AS `year`, `students`.`section` AS `section`, `course`.`courseName` AS `courseName`, `department`.`dept_ID` AS `dept_ID`, `department`.`department_Name` AS `department_Name`, `students`.`stud_id` AS `stud_id` FROM ((((`userstudents` join `students` on((`students`.`sr_code` = `userstudents`.`sr_code`))) join `course` on((`course`.`courseID` = `students`.`courseID`))) join `department` on((`department`.`dept_ID` = `course`.`dept_ID`))) join `tb_studentinfo` on((`tb_studentinfo`.`studid` = `students`.`stud_id`)))  ;
-COMMIT;
+CREATE VIEW `studentinfoview`  AS SELECT `userstudents`.`userID` AS `userID`, `students`.`sr_code` AS `sr_code`, `userstudents`.`password` AS `password`, `userstudents`.`salt` AS `salt`, `tb_studentinfo`.`firstname` AS `firstName`, `tb_studentinfo`.`lastname` AS `lastName`, `course`.`courseID` AS `courseID`, `students`.`year` AS `year`, `students`.`section` AS `section`, `course`.`courseName` AS `courseName`, `department`.`dept_ID` AS `dept_ID`, `department`.`department_Name` AS `department_Name` FROM ((((`userstudents` join `students` on((`students`.`sr_code` = `userstudents`.`sr_code`))) join `tb_studentinfo` on((`students`.`stud_id` = `tb_studentinfo`.`studid`))) join `course` on((`course`.`courseID` = `students`.`courseID`))) join `department` on((`department`.`dept_ID` = `course`.`dept_ID`)))  ;
 
+DROP VIEW IF EXISTS `moderatorcookies`;
+CREATE VIEW `moderatorcookies`  AS SELECT `superusers`.`superID` AS `superID`, `superusers`.`userName` AS `userName`, `superusers`.`password` AS `password`, `superusers`.`salt` AS `salt`, `organization`.`org_ID` AS `org_ID`, `department`.`dept_ID` AS `dept_ID` FROM ((`superusers` join `organization` on((`superusers`.`superID` = `organization`.`superID`))) join `department` on((`department`.`dept_ID` = `organization`.`dept_ID`)))  ;
+
+DROP VIEW IF EXISTS `Notfications`;
+CREATE VIEW Notifications as SELECT * FROM event_info WHERE date(e_date) BETWEEN NOW() AND (NOW() + INTERVAL 7 day) and status = 'Approved';
+
+START TRANSACTION;
+DELIMITER $$
+DROP PROCEDURE IF EXISTS `registerStudents`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `registerStudents`(
+    IN sr_codeIN VARCHAR(10), 
+    IN firstnameIN VARCHAR(255), 
+    IN lastnameIN VARCHAR(255)
+)
+BEGIN
+    INSERT INTO tb_studentinfo(lastname, firstname, course) VALUES (lastnameIN, firstnameIN, 'BSIT'); 
+    SET @studid = LAST_INSERT_ID();
+    INSERT INTO students(sr_code, courseID, year, section, stud_id) VALUES (sr_codeIN, 6, '3rd', 'NT-3102', @studid);
+    SET @salt =  SUBSTRING(MD5(RAND()) FROM 1 FOR 10);
+	SET @password = SHA2(CONCAT(sr_codeIN,@salt),256);
+	INSERT INTO userstudents(sr_code,password,salt) values(sr_codeIN,@password,@salt);
+END$$
+DELIMITER ;
+
+CALL registerStudents('21-33273','ALEISTER','ALINSUNURIN');
+CALL registerStudents('21-38474','YVAN JEFF L.','ANUYO');
+CALL registerStudents('21-32782','BERNARD ANGELO E.','ARADA');
+CALL registerStudents('21-36452','EMMANUEL T.','BAYBAY');
+CALL registerStudents('21-35509','JED MHARWAYNE P.','CANUEL');
+CALL registerStudents('21-31630','LEOMAR P.','DE LA CRUZ');
+CALL registerStudents('21-30506','ROYSHANE MARU P.','DIEZ');
+CALL registerStudents('21-36155','AUBREY A.','ESGUERRA');
+CALL registerStudents('22-35794','CEDRICK JHON','FIESTADA');
+CALL registerStudents('21-35078','GENELLA MAE E.','GRENIAS');
+CALL registerStudents('21-30802','JOHN MATTHEW I.','HORARIO');
+CALL registerStudents('21-34772','MIKKO D.','IGLE');
+CALL registerStudents('21-36111','JOHN AERON D.','LATORRE');
+CALL registerStudents('21-30320','JULIUS MELWIN D.','LAYLO');
+CALL registerStudents('21-36991','JHON MARK L.','MALUPA');
+CALL registerStudents('21-37287','DON-DON C.','MARANAN');
+CALL registerStudents('21-32548','MIKAELA A.','MARANAN');
+CALL registerStudents('21-37831','KURT DRAHCIR C.','MERCADO');
+CALL registerStudents('21-37178','ELBERT D.','NEBRES');
+CALL registerStudents('21-30812','JOMARI M.','PANALIGAN');
+CALL registerStudents('21-34330','ALLEN EIDRIAN S.','RAMOS');
+CALL registerStudents('21-32259','JUN MARK C.','RITUAL');
+CALL registerStudents('21-33470','EMJAY R.','RONGAVILLA');
+CALL registerStudents('21-37046','MIKO JASPER M.','SALANGSANG');
+CALL registerStudents('21-36999','FRYAN AURIC L.','VALDEZ');
+CALL registerStudents('21-34053','KURT XAVIER L. ','VILLANUEVA');
+
+
+COMMIT;	
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
