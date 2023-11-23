@@ -497,14 +497,6 @@ CREATE TABLE IF NOT EXISTS `userstudents` (
   KEY `sr_code` (`sr_code`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
---
--- Dumping data for table `userstudents`
---
-
-INSERT INTO `userstudents` (`userID`, `sr_code`, `password`, `salt`) VALUES
-(1, '21-33470', 'e0999eedf060a2ee05ab267bdb52f827b5f0174d839ac30eae6cd235392531f6', '1ea831d0d9'),
-(3, '21-33273', 'e0999eedf060a2ee05ab267bdb52f827b5f0174d839ac30eae6cd235392531f6', '1ea831d0d9');
-
 -- --------------------------------------------------------
 
 --
