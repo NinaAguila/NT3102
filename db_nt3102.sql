@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 24, 2023 at 09:59 AM
+-- Generation Time: Nov 24, 2023 at 10:26 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.1.12
 
@@ -103,6 +103,13 @@ CREATE TABLE `stud_data` (
   `User_Password` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `stud_data`
+--
+
+INSERT INTO `stud_data` (`studid`, `srCode`, `User_Type`, `User_Email`, `User_Password`) VALUES
+(1, 21, 'User', '21-38474@g.batstate-u.edu.ph', 'user');
+
 -- --------------------------------------------------------
 
 --
@@ -137,8 +144,7 @@ CREATE TABLE `tb_studentinfo` (
 -- Indexes for table `add_stocks`
 --
 ALTER TABLE `add_stocks`
-  ADD PRIMARY KEY (`Product_ID`),
-  ADD KEY `empid` (`empid`);
+  ADD PRIMARY KEY (`Product_ID`);
 
 --
 -- Indexes for table `announcement`
@@ -156,8 +162,7 @@ ALTER TABLE `emp_data`
 -- Indexes for table `out_stocks`
 --
 ALTER TABLE `out_stocks`
-  ADD PRIMARY KEY (`Product_ID`),
-  ADD KEY `empid` (`empid`);
+  ADD PRIMARY KEY (`Product_ID`);
 
 --
 -- Indexes for table `product`
@@ -221,7 +226,7 @@ ALTER TABLE `product`
 -- AUTO_INCREMENT for table `stud_data`
 --
 ALTER TABLE `stud_data`
-  MODIFY `studid` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `studid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tbemployee`
@@ -234,22 +239,6 @@ ALTER TABLE `tbemployee`
 --
 ALTER TABLE `tb_studentinfo`
   MODIFY `studid` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `out_stocks`
---
-ALTER TABLE `out_stocks`
-  ADD CONSTRAINT `out_stocks_ibfk_1` FOREIGN KEY (`empid`) REFERENCES `tbemployee` (`empid`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `tbemployee`
---
-ALTER TABLE `tbemployee`
-  ADD CONSTRAINT `tbemployee_ibfk_1` FOREIGN KEY (`empid`) REFERENCES `add_stocks` (`empid`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
