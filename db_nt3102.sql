@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Nov 22, 2023 at 01:42 PM
+-- Generation Time: Nov 24, 2023 at 09:26 AM
 -- Server version: 8.0.31
 -- PHP Version: 8.0.26
 
@@ -64,7 +64,7 @@ CREATE TABLE IF NOT EXISTS `lost_items` (
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   KEY `student_id` (`student_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `lost_items`
@@ -92,7 +92,9 @@ INSERT INTO `lost_items` (`id`, `item_number`, `item_name`, `date_found`, `date_
 (19, '000019', 'Shades', '2023-11-21', '2023-11-22', NULL, NULL),
 (20, '000020', 'Ballpen', '2023-11-21', NULL, NULL, NULL),
 (21, '000021', 'handkerchief', '2023-11-22', NULL, NULL, NULL),
-(22, '000022', 'Relo', '2023-11-23', NULL, NULL, NULL);
+(22, '000022', 'Relo', '2023-11-23', NULL, NULL, NULL),
+(23, '000023', 'Charger Cable ', '2023-11-25', NULL, NULL, NULL),
+(24, '000024', 'NoteBook', '2023-11-25', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -116,7 +118,8 @@ CREATE TABLE IF NOT EXISTS `security_lostnfound` (
 
 INSERT INTO `security_lostnfound` (`UserId`, `username`, `password`, `role`, `usersign`) VALUES
 (1010, 'Admin_Sd', 'adminsd', 'admin', 'Seurity Department'),
-(2125, 'jose2125', '2125', 'security', 'Security_G0');
+(2125, 'jose2125', '2125', 'security', 'Security_G0'),
+(2121, 'MarkRyuo', '2121', 'admin', 'Seurity Department');
 
 -- --------------------------------------------------------
 
@@ -160,7 +163,8 @@ CREATE TABLE IF NOT EXISTS `tbemployee` (
 
 INSERT INTO `tbemployee` (`empid`, `lastname`, `firstname`, `department`) VALUES
 (1010, 'Admin_Sd', 'Admin_Sd', 'Seurity Department'),
-(2125, 'Manabat', 'Jose', 'Seurity Department');
+(2125, 'Manabat', 'Jose', 'Seurity Department'),
+(2121, 'Ryuo', 'Mark', 'Seurity Department');
 
 -- --------------------------------------------------------
 
