@@ -406,7 +406,7 @@ CREATE TABLE `announcement` (
 
 CREATE TABLE `emp_data` (
   `empid` int(11) NOT NULL,
-  `empCode` int(11) NOT NULL,
+  `empCode` varchar(11) NOT NULL,
   `User_Type` varchar(100) NOT NULL,
   `User_Email` varchar(100) NOT NULL,
   `User_Password` varchar(100) NOT NULL
@@ -449,7 +449,7 @@ CREATE TABLE `product` (
 
 CREATE TABLE `stud_data` (
   `studid` int(11) NOT NULL,
-  `srCode` int(11) DEFAULT NULL,
+  `srCode` varchar(11) DEFAULT NULL,
   `User_Type` varchar(100) DEFAULT NULL,
   `User_Email` varchar(100) NOT NULL,
   `User_Password` varchar(100) NOT NULL
