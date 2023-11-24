@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 24, 2023 at 10:22 AM
+-- Generation Time: Nov 24, 2023 at 10:36 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -29,6 +29,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `attendance_tbl` (
   `AttendanceID` int(11) NOT NULL,
+  `FacultyID` int(11) NOT NULL,
   `studid` varchar(25) NOT NULL,
   `AttendanceDate` varchar(25) NOT NULL,
   `ClassSection` varchar(25) NOT NULL,
@@ -45,6 +46,7 @@ CREATE TABLE `attendance_tbl` (
 
 CREATE TABLE `faculty_tbl` (
   `FacultyID` int(11) NOT NULL,
+  `empid` int(11) NOT NULL,
   `FacultyUsername` varchar(25) NOT NULL,
   `FacultyPassword` varchar(25) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -53,8 +55,8 @@ CREATE TABLE `faculty_tbl` (
 -- Dumping data for table `faculty_tbl`
 --
 
-INSERT INTO `faculty_tbl` (`FacultyID`, `FacultyUsername`, `FacultyPassword`) VALUES
-(1, 'BSU_admin123!', 'adminAccess123BSU');
+INSERT INTO `faculty_tbl` (`FacultyID`, `empid`, `FacultyUsername`, `FacultyPassword`) VALUES
+(1, 1, 'Jennifer Reyes', 'jenniferreyes123');
 
 -- --------------------------------------------------------
 
@@ -89,6 +91,13 @@ CREATE TABLE `tbemployee` (
   `firstname` varchar(25) NOT NULL,
   `department` varchar(20) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tbemployee`
+--
+
+INSERT INTO `tbemployee` (`empid`, `lastname`, `firstname`, `department`) VALUES
+(1, 'Reyes', 'Jennifer', 'BSIT');
 
 -- --------------------------------------------------------
 
