@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 20, 2023 at 12:44 AM
+-- Generation Time: Nov 24, 2023 at 10:22 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -29,26 +29,13 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `attendance_tbl` (
   `AttendanceID` int(11) NOT NULL,
-  `FacultyID` varchar(25) NOT NULL,
-  `StudentID` varchar(25) NOT NULL,
+  `studid` varchar(25) NOT NULL,
   `AttendanceDate` varchar(25) NOT NULL,
   `ClassSection` varchar(25) NOT NULL,
   `Room` varchar(25) NOT NULL,
   `TimeStart` time(6) NOT NULL,
   `TimeEnd` time(6) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Dumping data for table `attendance_tbl`
---
-
-INSERT INTO `attendance_tbl` (`AttendanceID`, `FacultyID`, `StudentID`, `AttendanceDate`, `ClassSection`, `Room`, `TimeStart`, `TimeEnd`) VALUES
-(1, '1', '3', '2023-11-02', 'BSIT-NT-3102', 'CECS 503', '08:00:00.000000', '11:00:00.000000'),
-(2, '1', '2', '2023-11-02', 'BSIT-NT-3102', 'CECS 503', '08:00:00.000000', '11:00:00.000000'),
-(3, '1', '1', '2023-11-02', 'BSIT-NT-3102', 'CECS 503', '08:00:00.000000', '11:00:00.000000'),
-(4, '1', '3', '2023-11-04', 'BSIT-NT-3102', 'HEB 502', '12:00:00.000000', '16:00:00.000000'),
-(11, '1', '1', '2023-11-17', 'BSIT-NT-1104', 'CECS 301', '08:00:00.000000', '12:00:00.000000'),
-(10, '1', '3', '2023-11-17', 'BSCS-NT-1102', 'HEB 402', '12:00:00.000000', '16:00:00.000000');
 
 -- --------------------------------------------------------
 
@@ -67,7 +54,7 @@ CREATE TABLE `faculty_tbl` (
 --
 
 INSERT INTO `faculty_tbl` (`FacultyID`, `FacultyUsername`, `FacultyPassword`) VALUES
-(1, 'Jennifer Reyes', 'jenniferreyes123');
+(1, 'BSU_admin123!', 'adminAccess123BSU');
 
 -- --------------------------------------------------------
 
@@ -77,18 +64,54 @@ INSERT INTO `faculty_tbl` (`FacultyID`, `FacultyUsername`, `FacultyPassword`) VA
 
 CREATE TABLE `student_tbl` (
   `StudentID` int(11) NOT NULL,
-  `StudentQR` varchar(300) NOT NULL,
-  `StudentName` varchar(25) NOT NULL
+  `studid` int(11) NOT NULL,
+  `StudentQR` varchar(300) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `student_tbl`
 --
 
-INSERT INTO `student_tbl` (`StudentID`, `StudentQR`, `StudentName`) VALUES
-(1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzcmNvZGUiOiIyMS0zNjk5OSIsImZ1bGxuYW1lIjoiVkFMREVaLCBGUllBTiBBVVJJQyBMLiIsInRpbWVzdGFtcCI6IjIwMjMtMTEtMTYgMjI6MDA6MTUiLCJ0eXBlIjoiU1RVREVOVCIsInVzZXJpZCI6IjIxLTM2OTk5In0.Zvx0BjtFexJ1dKbr295nGIUDCA9vZ44yqmdoBBw7rfc', 'Fryan Auric L. Valdez'),
-(2, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzcmNvZGUiOiIyMS0zNjQ1MiIsImZ1bGxuYW1lIjoiQkFZQkFZLCBFTU1BTlVFTCBULiIsInRpbWVzdGFtcCI6IjIwMjMtMTEtMTYgMTk6MDE6MDYiLCJ0eXBlIjoiU1RVREVOVCIsInVzZXJpZCI6IjIxLTM2NDUyIn0.rXk1EvJwCKX0S1Lw9OpjZV7onA0Nzmj1VpXwPYTZgBE', 'Emmanuel Baybay'),
-(3, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzcmNvZGUiOiIyMS0zNjExMSIsImZ1bGxuYW1lIjoiTEFUT1JSRSwgSk9ITiBBRVJPTiBELiIsInRpbWVzdGFtcCI6IjIwMjMtMTEtMTYgMjE6NTA6MDQiLCJ0eXBlIjoiU1RVREVOVCIsInVzZXJpZCI6IjIxLTM2MTExIn0.qVMtyeO9V_qiWnM9lJe8fNT9NnZPaAYVDTFgdyAstYo', 'John Aeron Latorre');
+INSERT INTO `student_tbl` (`StudentID`, `studid`, `StudentQR`) VALUES
+(1, 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzcmNvZGUiOiIyMS0zNjk5OSIsImZ1bGxuYW1lIjoiVkFMREVaLCBGUllBTiBBVVJJQyBMLiIsInRpbWVzdGFtcCI6IjIwMjMtMTEtMTYgMjI6MDA6MTUiLCJ0eXBlIjoiU1RVREVOVCIsInVzZXJpZCI6IjIxLTM2OTk5In0.Zvx0BjtFexJ1dKbr295nGIUDCA9vZ44yqmdoBBw7rfc'),
+(2, 2, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzcmNvZGUiOiIyMS0zNjQ1MiIsImZ1bGxuYW1lIjoiQkFZQkFZLCBFTU1BTlVFTCBULiIsInRpbWVzdGFtcCI6IjIwMjMtMTEtMjQgMTY6NDE6NDAiLCJ0eXBlIjoiU1RVREVOVCIsInVzZXJpZCI6IjIxLTM2NDUyIn0.PJOlVBipbUwubXYYsoC2leHBinMpTBces1s3VkQUGNE'),
+(3, 3, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzcmNvZGUiOiIyMS0zNjExMSIsImZ1bGxuYW1lIjoiTEFUT1JSRSwgSk9ITiBBRVJPTiBELiIsInRpbWVzdGFtcCI6IjIwMjMtMTEtMTYgMjE6NTA6MDQiLCJ0eXBlIjoiU1RVREVOVCIsInVzZXJpZCI6IjIxLTM2MTExIn0.qVMtyeO9V_qiWnM9lJe8fNT9NnZPaAYVDTFgdyAstYo');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbemployee`
+--
+
+CREATE TABLE `tbemployee` (
+  `empid` int(11) NOT NULL,
+  `lastname` varchar(25) NOT NULL,
+  `firstname` varchar(25) NOT NULL,
+  `department` varchar(20) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_studentinfo`
+--
+
+CREATE TABLE `tb_studentinfo` (
+  `studid` int(11) NOT NULL,
+  `lastname` varchar(25) NOT NULL,
+  `firstname` varchar(25) NOT NULL,
+  `course` varchar(20) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tb_studentinfo`
+--
+
+INSERT INTO `tb_studentinfo` (`studid`, `lastname`, `firstname`, `course`) VALUES
+(1, 'Valdez', 'Fryan Auric', 'BSIT'),
+(2, 'Baybay', 'Emmanuel', 'BSIT'),
+(3, 'Latorre', 'John Aeron', 'BSIT'),
+(4, 'Nebres', 'Elbert', 'BSCS');
 
 --
 -- Indexes for dumped tables
@@ -113,6 +136,12 @@ ALTER TABLE `student_tbl`
   ADD PRIMARY KEY (`StudentID`);
 
 --
+-- Indexes for table `tbemployee`
+--
+ALTER TABLE `tbemployee`
+  ADD PRIMARY KEY (`empid`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -120,7 +149,7 @@ ALTER TABLE `student_tbl`
 -- AUTO_INCREMENT for table `attendance_tbl`
 --
 ALTER TABLE `attendance_tbl`
-  MODIFY `AttendanceID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `AttendanceID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `faculty_tbl`
@@ -132,7 +161,7 @@ ALTER TABLE `faculty_tbl`
 -- AUTO_INCREMENT for table `student_tbl`
 --
 ALTER TABLE `student_tbl`
-  MODIFY `StudentID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `StudentID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
