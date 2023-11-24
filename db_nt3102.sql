@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 21, 2023 at 07:34 AM
+-- Generation Time: Nov 24, 2023 at 09:59 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.1.12
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `inventory_system`
+-- Database: `db_nt3102`
 --
 
 -- --------------------------------------------------------
@@ -34,13 +34,6 @@ CREATE TABLE `add_stocks` (
   `Date` date NOT NULL,
   `empid` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `add_stocks`
---
-
-INSERT INTO `add_stocks` (`Product_ID`, `Quantity`, `Transaction_No`, `Date`, `empid`) VALUES
-(1, 5, 1, '2023-11-21', 5678);
 
 -- --------------------------------------------------------
 
@@ -60,20 +53,12 @@ CREATE TABLE `announcement` (
 --
 
 CREATE TABLE `emp_data` (
-  `User_ID` int(11) NOT NULL,
   `empid` int(11) NOT NULL,
+  `empCode` int(11) NOT NULL,
   `User_Type` varchar(100) NOT NULL,
   `User_Email` varchar(100) NOT NULL,
   `User_Password` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `emp_data`
---
-
-INSERT INTO `emp_data` (`User_ID`, `empid`, `User_Type`, `User_Email`, `User_Password`) VALUES
-(1, 1234, 'Admin', '1234@g.batstate-u.edu.ph', 'admin'),
-(2, 5678, 'RGO Admin', '5678@g.batstate-u.edu.ph', 'admin');
 
 -- --------------------------------------------------------
 
@@ -88,13 +73,6 @@ CREATE TABLE `out_stocks` (
   `Date` date NOT NULL,
   `empid` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `out_stocks`
---
-
-INSERT INTO `out_stocks` (`Product_ID`, `SoldStocks`, `Transaction_No`, `Date`, `empid`) VALUES
-(1, '12', 1, '2023-11-21', 5678);
 
 -- --------------------------------------------------------
 
@@ -111,13 +89,6 @@ CREATE TABLE `product` (
   `image` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `product`
---
-
-INSERT INTO `product` (`Product_ID`, `Category_Name`, `Product_Name`, `Description`, `Price`, `image`) VALUES
-(1, 'Uniform', 'Polo', 'Large', 350, '655af4f733676.png');
-
 -- --------------------------------------------------------
 
 --
@@ -125,19 +96,12 @@ INSERT INTO `product` (`Product_ID`, `Category_Name`, `Product_Name`, `Descripti
 --
 
 CREATE TABLE `stud_data` (
-  `User_ID` int(255) NOT NULL,
-  `studid` int(11) DEFAULT NULL,
+  `studid` int(11) NOT NULL,
+  `srCode` int(11) DEFAULT NULL,
   `User_Type` varchar(100) DEFAULT NULL,
   `User_Email` varchar(100) NOT NULL,
   `User_Password` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `stud_data`
---
-
-INSERT INTO `stud_data` (`User_ID`, `studid`, `User_Type`, `User_Email`, `User_Password`) VALUES
-(1, 2138474, 'User', '2138474@g.batstate-u.edu.ph', 'user');
 
 -- --------------------------------------------------------
 
@@ -152,14 +116,6 @@ CREATE TABLE `tbemployee` (
   `department` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `tbemployee`
---
-
-INSERT INTO `tbemployee` (`empid`, `lastname`, `firstname`, `department`) VALUES
-(1234, 'Tatum', 'Jason', 'RGO'),
-(5678, 'Chu', 'Kimi', 'RGO');
-
 -- --------------------------------------------------------
 
 --
@@ -172,13 +128,6 @@ CREATE TABLE `tb_studentinfo` (
   `firstname` varchar(25) NOT NULL,
   `course` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `tb_studentinfo`
---
-
-INSERT INTO `tb_studentinfo` (`studid`, `lastname`, `firstname`, `course`) VALUES
-(2138474, 'Anuyo', 'Yvan', 'BSIT');
 
 --
 -- Indexes for dumped tables
@@ -201,8 +150,7 @@ ALTER TABLE `announcement`
 -- Indexes for table `emp_data`
 --
 ALTER TABLE `emp_data`
-  ADD PRIMARY KEY (`User_ID`),
-  ADD KEY `empid` (`empid`);
+  ADD PRIMARY KEY (`empid`);
 
 --
 -- Indexes for table `out_stocks`
@@ -221,8 +169,7 @@ ALTER TABLE `product`
 -- Indexes for table `stud_data`
 --
 ALTER TABLE `stud_data`
-  ADD PRIMARY KEY (`User_ID`),
-  ADD KEY `studid` (`studid`);
+  ADD PRIMARY KEY (`studid`);
 
 --
 -- Indexes for table `tbemployee`
@@ -244,7 +191,7 @@ ALTER TABLE `tb_studentinfo`
 -- AUTO_INCREMENT for table `add_stocks`
 --
 ALTER TABLE `add_stocks`
-  MODIFY `Product_ID` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `Product_ID` int(100) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `announcement`
@@ -256,41 +203,41 @@ ALTER TABLE `announcement`
 -- AUTO_INCREMENT for table `emp_data`
 --
 ALTER TABLE `emp_data`
-  MODIFY `User_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `empid` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `out_stocks`
 --
 ALTER TABLE `out_stocks`
-  MODIFY `Product_ID` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `Product_ID` int(100) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `Product_ID` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `Product_ID` int(100) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `stud_data`
 --
 ALTER TABLE `stud_data`
-  MODIFY `User_ID` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `studid` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tbemployee`
+--
+ALTER TABLE `tbemployee`
+  MODIFY `empid` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tb_studentinfo`
+--
+ALTER TABLE `tb_studentinfo`
+  MODIFY `studid` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Constraints for dumped tables
 --
-
---
--- Constraints for table `add_stocks`
---
-ALTER TABLE `add_stocks`
-  ADD CONSTRAINT `add_stocks_ibfk_1` FOREIGN KEY (`empid`) REFERENCES `tbemployee` (`empid`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `emp_data`
---
-ALTER TABLE `emp_data`
-  ADD CONSTRAINT `emp_data_ibfk_1` FOREIGN KEY (`empid`) REFERENCES `tbemployee` (`empid`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `out_stocks`
@@ -299,10 +246,10 @@ ALTER TABLE `out_stocks`
   ADD CONSTRAINT `out_stocks_ibfk_1` FOREIGN KEY (`empid`) REFERENCES `tbemployee` (`empid`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `stud_data`
+-- Constraints for table `tbemployee`
 --
-ALTER TABLE `stud_data`
-  ADD CONSTRAINT `stud_data_ibfk_1` FOREIGN KEY (`studid`) REFERENCES `tb_studentinfo` (`studid`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `tbemployee`
+  ADD CONSTRAINT `tbemployee_ibfk_1` FOREIGN KEY (`empid`) REFERENCES `add_stocks` (`empid`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
