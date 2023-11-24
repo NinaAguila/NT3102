@@ -7,6 +7,7 @@
 -- Server version: 8.0.31
 -- PHP Version: 8.0.26
 
+
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
@@ -375,21 +376,158 @@ INSERT INTO `superusers` (`superID`, `userName`, `password`, `salt`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `add_stocks`
+--
+
+CREATE TABLE `add_stocks` (
+  `Product_ID` int(100) NOT NULL,
+  `Quantity` int(50) NOT NULL,
+  `Transaction_No` int(50) NOT NULL,
+  `Date` date NOT NULL,
+  `empid` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `announcement`
+--
+
+CREATE TABLE `announcement` (
+  `id` int(50) NOT NULL,
+  `announcement` varchar(10000) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `emp_data`
+--
+
+CREATE TABLE `emp_data` (
+  `empid` int(11) NOT NULL,
+  `empCode` int(11) NOT NULL,
+  `User_Type` varchar(100) NOT NULL,
+  `User_Email` varchar(100) NOT NULL,
+  `User_Password` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `out_stocks`
+--
+
+CREATE TABLE `out_stocks` (
+  `Product_ID` int(100) NOT NULL,
+  `SoldStocks` varchar(100) NOT NULL,
+  `Transaction_No` int(100) NOT NULL,
+  `Date` date NOT NULL,
+  `empid` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product`
+--
+
+CREATE TABLE `product` (
+  `Product_ID` int(100) NOT NULL,
+  `Category_Name` varchar(100) NOT NULL,
+  `Product_Name` varchar(100) NOT NULL,
+  `Description` varchar(100) NOT NULL,
+  `Price` int(50) NOT NULL,
+  `image` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `stud_data`
+--
+
+CREATE TABLE `stud_data` (
+  `studid` int(11) NOT NULL,
+  `srCode` int(11) DEFAULT NULL,
+  `User_Type` varchar(100) DEFAULT NULL,
+  `User_Email` varchar(100) NOT NULL,
+  `User_Password` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `stud_data`
+--
+
+INSERT INTO `stud_data` (`studid`, `srCode`, `User_Type`, `User_Email`, `User_Password`) VALUES
+(1, 21, 'User', '21-38474@g.batstate-u.edu.ph', 'user');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tbemployee`
 --
 
 DROP TABLE IF EXISTS `tbemployee`;
 CREATE TABLE IF NOT EXISTS `tbemployee` (
-  `empid` int NOT NULL,
+  `empid` int(11) NOT NULL,
   `lastname` varchar(25) NOT NULL,
   `firstname` varchar(25) NOT NULL,
   `department` varchar(20) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `tb_studentinfo`
+--
+
+
+-- Indexes for dumped tables
+--
+-- Indexes for table `add_stocks`
+--
+ALTER TABLE `add_stocks`
+  ADD PRIMARY KEY (`Product_ID`);
+
+--
+-- Indexes for table `announcement`
+--
+ALTER TABLE `announcement`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `emp_data`
+--
+ALTER TABLE `emp_data`
+  ADD PRIMARY KEY (`empid`);
+
+--
+-- Indexes for table `out_stocks`
+--
+ALTER TABLE `out_stocks`
+  ADD PRIMARY KEY (`Product_ID`);
+
+--
+-- Indexes for table `product`
+--
+ALTER TABLE `product`
+  ADD PRIMARY KEY (`Product_ID`);
+
+--
+-- Indexes for table `stud_data`
+--
+ALTER TABLE `stud_data`
+  ADD PRIMARY KEY (`studid`);
+
+--
+-- Indexes for table `tbemployee`
+--
+ALTER TABLE `tbemployee`
+  ADD PRIMARY KEY (`empid`);
+
+--
+-- Indexes for table `tb_studentinfo`
 --
 
 DROP TABLE IF EXISTS `tb_studentinfo`;
@@ -418,13 +556,7 @@ CREATE TABLE IF NOT EXISTS `userstudents` (
   KEY `sr_code` (`sr_code`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
---
--- Dumping data for table `userstudents`
---
 
-INSERT INTO `userstudents` (`userID`, `sr_code`, `password`, `salt`) VALUES
-(1, '21-33470', 'e0999eedf060a2ee05ab267bdb52f827b5f0174d839ac30eae6cd235392531f6', '1ea831d0d9'),
-(3, '21-33273', 'e0999eedf060a2ee05ab267bdb52f827b5f0174d839ac30eae6cd235392531f6', '1ea831d0d9');
 
 -- --------------------------------------------------------
 
@@ -456,8 +588,6 @@ FROM
 GROUP BY `eventattendees`.`attendeeID`, `eventattendees`.`eventID`;
 -- --------------------------------------------------------
 
---
--- Structure for view `event_info`
 --
 DROP TABLE IF EXISTS `event_info`;
 
@@ -534,6 +664,49 @@ CALL registerStudents('21-33470','EMJAY R.','RONGAVILLA');
 CALL registerStudents('21-37046','MIKO JASPER M.','SALANGSANG');
 CALL registerStudents('21-36999','FRYAN AURIC L.','VALDEZ');
 CALL registerStudents('21-34053','KURT XAVIER L. ','VILLANUEVA');
+
+
+--
+-- AUTO_INCREMENT for table `add_stocks`
+--
+ALTER TABLE `add_stocks`
+  MODIFY `Product_ID` int(100) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `announcement`
+--
+ALTER TABLE `announcement`
+  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `emp_data`
+--
+ALTER TABLE `emp_data`
+  MODIFY `empid` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `out_stocks`
+--
+ALTER TABLE `out_stocks`
+  MODIFY `Product_ID` int(100) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `product`
+--
+ALTER TABLE `product`
+  MODIFY `Product_ID` int(100) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `stud_data`
+--
+ALTER TABLE `stud_data`
+  MODIFY `studid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `tbemployee`
+--
+ALTER TABLE `tbemployee`
+  MODIFY `empid` int(11) NOT NULL AUTO_INCREMENT;
 
 
 COMMIT;	
