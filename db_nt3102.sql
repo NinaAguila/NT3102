@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 24, 2023 at 10:36 AM
+-- Generation Time: Nov 24, 2023 at 10:55 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -158,7 +158,7 @@ ALTER TABLE `tbemployee`
 -- AUTO_INCREMENT for table `attendance_tbl`
 --
 ALTER TABLE `attendance_tbl`
-  MODIFY `AttendanceID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `AttendanceID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `faculty_tbl`
