@@ -622,6 +622,9 @@ CREATE VIEW `moderatorcookies`  AS SELECT `superusers`.`superID` AS `superID`, `
 DROP VIEW IF EXISTS `Notfications`;
 CREATE VIEW Notifications as SELECT * FROM event_info WHERE date(e_date) BETWEEN NOW() AND (NOW() + INTERVAL 7 day) and status = 'Approved';
 
+DROP VIEW IF EXISTS `stud_atendees_view`;
+CREATE  VIEW stud_atendees_view  AS SELECT studentinfoview.`userID` AS userID, studentinfoview.`dept_ID` AS dept_ID, studentinfoview.`department_Name` AS stud_dept, event_info.`statusID` AS statusID, event_info.`status` AS status, eventattendees.`eventID` AS stud_deptid, event_info.`org_ID` AS org_ID, event_info.`e_date` AS e_date, eventattendees.`attendeeID` AS attendeeID, eventattendees.`eventID` AS eventID, eventattendees.`DateRegistered` AS DateRegistered FROM ((eventattendees join event_info on((event_info.`eventID` = eventattendees.`eventID`))) join studentinfoview on((studentinfoview.`userID` = eventattendees.`attendeeID`)))  ;
+
 START TRANSACTION;
 DELIMITER $$
 DROP PROCEDURE IF EXISTS `registerStudents`$$
