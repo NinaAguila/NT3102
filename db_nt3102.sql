@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Nov 24, 2023 at 08:55 AM
+-- Generation Time: Nov 24, 2023 at 11:36 PM
 -- Server version: 8.0.31
 -- PHP Version: 8.0.26
 
@@ -30,6 +30,7 @@ SET time_zone = "+00:00";
 DROP TABLE IF EXISTS `admin`;
 CREATE TABLE IF NOT EXISTS `admin` (
   `id` int NOT NULL AUTO_INCREMENT,
+  `empid` int NOT NULL,
   `username` varchar(30) NOT NULL,
   `password` varchar(60) NOT NULL,
   PRIMARY KEY (`id`)
@@ -39,9 +40,9 @@ CREATE TABLE IF NOT EXISTS `admin` (
 -- Dumping data for table `admin`
 --
 
-INSERT INTO `admin` (`id`, `username`, `password`) VALUES
-(1, 'Admin', 'admin123'),
-(2, 'Librarian', 'librarian123');
+INSERT INTO `admin` (`id`, `empid`, `username`, `password`) VALUES
+(1, 1, 'Admin', 'admin123'),
+(2, 2, 'Librarian', 'librarian123');
 
 -- --------------------------------------------------------
 
@@ -53,6 +54,7 @@ DROP TABLE IF EXISTS `attendance`;
 CREATE TABLE IF NOT EXISTS `attendance` (
   `id` int NOT NULL AUTO_INCREMENT,
   `sr_code` int NOT NULL,
+  `studid` int NOT NULL,
   `date` date NOT NULL,
   `time_in` time NOT NULL,
   `status` int NOT NULL,
@@ -70,23 +72,20 @@ CREATE TABLE IF NOT EXISTS `attendance` (
 DROP TABLE IF EXISTS `students`;
 CREATE TABLE IF NOT EXISTS `students` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `sr_code` varchar(15) NOT NULL,
-  `email` text NOT NULL,
-  `course` varchar(20) NOT NULL,
-  `year_level` varchar(10) NOT NULL,
+  `studid` int NOT NULL,
+  `sr_code` varchar(300) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `students`
 --
 
-INSERT INTO `students` (`id`, `sr_code`, `email`, `course`, `year_level`) VALUES
-(1, '21-34990', '21-34990@gmail.com', 'BSBA', '4rd Year'),
-(2, '21-35881', '21-35881@gmail.com', 'BSCS', '4rd Year'),
-(3, '21-36992', '21-36992@g.batstate-u.edu.ph', 'BSBA', '2nd Year'),
-(4, '21-56882', '21-56882@g.batstate-u.edu.ph', 'BSCS', '3rd Year'),
-(5, '21-37224', '21-37224@g.batstate-u.edu.ph', 'BSC', '2nd Year');
+INSERT INTO `students` (`id`, `studid`, `sr_code`) VALUES
+(1, 1, '21-34990'),
+(2, 2, '21-35881'),
+(3, 3, '21-36992'),
+(4, 4, '21-56882');
 
 -- --------------------------------------------------------
 
