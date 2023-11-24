@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 24, 2023 at 06:05 AM
+-- Generation Time: Nov 24, 2023 at 06:41 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -89,9 +89,7 @@ CREATE TABLE `student_tbl` (
 INSERT INTO `student_tbl` (`StudentID`, `studid`, `StudentQR`) VALUES
 (1, 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzcmNvZGUiOiIyMS0zNjk5OSIsImZ1bGxuYW1lIjoiVkFMREVaLCBGUllBTiBBVVJJQyBMLiIsInRpbWVzdGFtcCI6IjIwMjMtMTEtMTYgMjI6MDA6MTUiLCJ0eXBlIjoiU1RVREVOVCIsInVzZXJpZCI6IjIxLTM2OTk5In0.Zvx0BjtFexJ1dKbr295nGIUDCA9vZ44yqmdoBBw7rfc'),
 (2, 2, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzcmNvZGUiOiIyMS0zNjQ1MiIsImZ1bGxuYW1lIjoiQkFZQkFZLCBFTU1BTlVFTCBULiIsInRpbWVzdGFtcCI6IjIwMjMtMTEtMTYgMTk6MDE6MDYiLCJ0eXBlIjoiU1RVREVOVCIsInVzZXJpZCI6IjIxLTM2NDUyIn0.rXk1EvJwCKX0S1Lw9OpjZV7onA0Nzmj1VpXwPYTZgBE'),
-(3, 3, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzcmNvZGUiOiIyMS0zNjExMSIsImZ1bGxuYW1lIjoiTEFUT1JSRSwgSk9ITiBBRVJPTiBELiIsInRpbWVzdGFtcCI6IjIwMjMtMTEtMTYgMjE6NTA6MDQiLCJ0eXBlIjoiU1RVREVOVCIsInVzZXJpZCI6IjIxLTM2MTExIn0.qVMtyeO9V_qiWnM9lJe8fNT9NnZPaAYVDTFgdyAstYo'),
-(6, 4, 'Elbert Nebres'),
-(8, 5, 'Kurt Villanueva');
+(3, 3, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzcmNvZGUiOiIyMS0zNjExMSIsImZ1bGxuYW1lIjoiTEFUT1JSRSwgSk9ITiBBRVJPTiBELiIsInRpbWVzdGFtcCI6IjIwMjMtMTEtMTYgMjE6NTA6MDQiLCJ0eXBlIjoiU1RVREVOVCIsInVzZXJpZCI6IjIxLTM2MTExIn0.qVMtyeO9V_qiWnM9lJe8fNT9NnZPaAYVDTFgdyAstYo');
 
 -- --------------------------------------------------------
 
@@ -105,13 +103,6 @@ CREATE TABLE `tbemployee` (
   `firstname` varchar(25) NOT NULL,
   `department` varchar(20) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `tbemployee`
---
-
-INSERT INTO `tbemployee` (`empid`, `lastname`, `firstname`, `department`) VALUES
-(1, 'Reyes', 'Jennifer', 'BSIT');
 
 -- --------------------------------------------------------
 
@@ -133,9 +124,7 @@ CREATE TABLE `tb_studentinfo` (
 INSERT INTO `tb_studentinfo` (`studid`, `lastname`, `firstname`, `course`) VALUES
 (1, 'Valdez', 'Fryan Auric', 'BSIT'),
 (2, 'Baybay', 'Emmanuel', 'BSIT'),
-(3, 'Latorre', 'John Aeron', 'BSIT'),
-(4, 'Nebres', 'Elbert', 'BSCS'),
-(5, 'Villanueva', 'Kurt', 'BSCS');
+(3, 'Latorre', 'John Aeron', 'BSIT');
 
 --
 -- Indexes for dumped tables
