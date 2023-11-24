@@ -32,8 +32,6 @@ CREATE TABLE IF NOT EXISTS `admin` (
   `id` int NOT NULL AUTO_INCREMENT,
   `username` varchar(30) NOT NULL,
   `password` varchar(60) NOT NULL,
-  `firstname` varchar(50) NOT NULL,
-  `lastname` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
@@ -41,9 +39,9 @@ CREATE TABLE IF NOT EXISTS `admin` (
 -- Dumping data for table `admin`
 --
 
-INSERT INTO `admin` (`id`, `username`, `password`, `firstname`, `lastname`) VALUES
-(1, 'Admin', 'admin123', 'Deku', 'Tagle'),
-(2, 'Librarian', 'librarian123', 'Ace', 'Payas');
+INSERT INTO `admin` (`id`, `username`, `password`) VALUES
+(1, 'Admin', 'admin123'),
+(2, 'Librarian', 'librarian123');
 
 -- --------------------------------------------------------
 
@@ -73,8 +71,6 @@ DROP TABLE IF EXISTS `students`;
 CREATE TABLE IF NOT EXISTS `students` (
   `id` int NOT NULL AUTO_INCREMENT,
   `sr_code` varchar(15) NOT NULL,
-  `firstname` varchar(50) NOT NULL,
-  `lastname` varchar(50) NOT NULL,
   `email` text NOT NULL,
   `course` varchar(20) NOT NULL,
   `year_level` varchar(10) NOT NULL,
@@ -85,12 +81,12 @@ CREATE TABLE IF NOT EXISTS `students` (
 -- Dumping data for table `students`
 --
 
-INSERT INTO `students` (`id`, `sr_code`, `firstname`, `lastname`, `email`, `course`, `year_level`) VALUES
-(1, '21-34990', 'Cyrus', 'Payas', '21-34990@gmail.com', 'BSBA', '4rd Year'),
-(2, '21-35881', 'Maiko', 'Tagle', '21-35881@gmail.com', 'BSCS', '4rd Year'),
-(3, '21-36992', 'Kyle', 'Tolentino', '21-36992@g.batstate-u.edu.ph', 'BSBA', '2nd Year'),
-(4, '21-56882', 'Paul', 'Pedrialva', '21-56882@g.batstate-u.edu.ph', 'BSCS', '3rd Year'),
-(5, '21-37224', 'Jim', 'Javier', '21-37224@g.batstate-u.edu.ph', 'BSC', '2nd Year');
+INSERT INTO `students` (`id`, `sr_code`, `email`, `course`, `year_level`) VALUES
+(1, '21-34990', '21-34990@gmail.com', 'BSBA', '4rd Year'),
+(2, '21-35881', '21-35881@gmail.com', 'BSCS', '4rd Year'),
+(3, '21-36992', '21-36992@g.batstate-u.edu.ph', 'BSBA', '2nd Year'),
+(4, '21-56882', '21-56882@g.batstate-u.edu.ph', 'BSCS', '3rd Year'),
+(5, '21-37224', '21-37224@g.batstate-u.edu.ph', 'BSC', '2nd Year');
 
 -- --------------------------------------------------------
 
