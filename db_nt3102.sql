@@ -78,7 +78,7 @@ CREATE TABLE IF NOT EXISTS `students_tbl` (
 ) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3;
 
 --
--- Dumping data for table `students`
+-- Dumping data for table `students_tbl`
 --
 
 INSERT INTO `students_tbl` (`id`, `studid`, `sr_code`) VALUES
