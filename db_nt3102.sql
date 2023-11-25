@@ -66,11 +66,11 @@ CREATE TABLE IF NOT EXISTS `attendance` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `students`
+-- Table structure for table `students_tbl`
 --
 
-DROP TABLE IF EXISTS `students`;
-CREATE TABLE IF NOT EXISTS `students` (
+DROP TABLE IF EXISTS `students_tbl`;
+CREATE TABLE IF NOT EXISTS `students_tbl` (
   `id` int NOT NULL AUTO_INCREMENT,
   `studid` int NOT NULL,
   `sr_code` varchar(300) NOT NULL,
@@ -81,7 +81,7 @@ CREATE TABLE IF NOT EXISTS `students` (
 -- Dumping data for table `students`
 --
 
-INSERT INTO `students` (`id`, `studid`, `sr_code`) VALUES
+INSERT INTO `students_tbl` (`id`, `studid`, `sr_code`) VALUES
 (1, 1, '21-34990'),
 (2, 2, '21-35881'),
 (3, 3, '21-36992'),
